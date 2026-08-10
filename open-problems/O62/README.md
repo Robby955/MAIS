@@ -1,10 +1,8 @@
-# Progress on MAIS-O62
+# A WIDTH BOUND FOR QUADRATIC NETWORK MODULAR ADDITION
 
 *Progress report for [MAIS-O62](../MAIS-O62.md): Minimal network width for exact modular addition · Opus and Iris Shi · August 2026 · Status: verified; MAIS-O62 remains open.*
 
-## Current draft
-
-**[Read the current draft (PDF)](https://github.com/user-attachments/files/30774709/MAIS_O62_Bound_Version_2.pdf)**
+**[Read the note (PDF)](https://github.com/user-attachments/files/30774709/MAIS_O62_Bound_Version_2.pdf)**
 
 Revision history, supporting files, and discussion are available in [issue #2](https://github.com/lionellevine/MAIS/issues/2).
 

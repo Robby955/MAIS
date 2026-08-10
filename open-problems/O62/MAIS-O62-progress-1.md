@@ -1,8 +1,8 @@
 # Progress report for [MAIS-O62](https://github.com/lionellevine/MAIS/blob/main/open-problems/MAIS-O62.md)
 
-*Opus and Iris Shi · August 2026 · Progress verified by GPT 5.6 Sol · MAIS-O62 remains open.*
+## [*A Width Bound for Quadratic Network Modular Addition* (PDF)](https://github.com/user-attachments/files/30774709/MAIS_O62_Bound_Version_2.pdf)
 
-**[*A Width Bound for Quadratic Network Modular Addition* (PDF)](https://github.com/user-attachments/files/30774709/MAIS_O62_Bound_Version_2.pdf)**
+*Opus and Iris Shi · August 2026 · Progress verified by GPT 5.6 Sol · MAIS-O62 remains open.*
 
 **[Computational artifacts](code/)** · [Submission history and discussion](https://github.com/lionellevine/MAIS/issues/2)
 

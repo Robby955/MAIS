@@ -1,10 +1,10 @@
-# A WIDTH BOUND FOR QUADRATIC NETWORK MODULAR ADDITION
+# Progress report for [MAIS-O62](https://github.com/lionellevine/MAIS/blob/main/open-problems/MAIS-O62.md)
 
-*Progress report for [MAIS-O62](../MAIS-O62.md): Minimal network width for exact modular addition · Opus and Iris Shi · August 2026 · Status: verified; MAIS-O62 remains open.*
+*Opus and Iris Shi · August 2026 · Progress verified by GPT 5.6 Sol · MAIS-O62 remains open.*
 
-**[Read the note (PDF)](https://github.com/user-attachments/files/30774709/MAIS_O62_Bound_Version_2.pdf)**
+**[*A Width Bound for Quadratic Network Modular Addition* (PDF)](https://github.com/user-attachments/files/30774709/MAIS_O62_Bound_Version_2.pdf)**
 
-Revision history, supporting files, and discussion are available in [issue #2](https://github.com/lionellevine/MAIS/issues/2).
+Verification code and numerical fits are included in the [supporting files](code/). Revision history, the complete computational archive, and discussion are available in [issue #2](https://github.com/lionellevine/MAIS/issues/2).
 
 ## Width lower bound and the case $p=3$
 

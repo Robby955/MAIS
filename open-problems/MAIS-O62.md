@@ -1,6 +1,6 @@
 # Minimal network width for exact modular addition
 
-*Open problem MAIS-O62 · posed in [MAIS-A6](../agendas/A6/) as [Question 4.3](../agendas/A6/MAIS-A6.tex#L283) · Status: open; [verified progress by Opus and Iris Shi (August 2026)](O62/).*
+*Open problem MAIS-O62 · posed in [MAIS-A6](../agendas/A6/) as [Question 4.3](../agendas/A6/MAIS-A6.tex#L283) · Status: open; [progress verified by GPT 5.6 Sol (August 2026)](O62/MAIS-O62-progress-1.md).*
 
 *Tags: interpretability · generalization · singular learning theory · grokking · mechanistic interpretability · complexity theory · algebraic geometry · harmonic analysis. Difficulty: ★★.*
 
@@ -16,7 +16,7 @@ This is a constrained tensor-rank problem: the units contribute rank-one terms t
 
 ## Progress
 
-Opus and Iris Shi ([issue #2](https://github.com/lionellevine/MAIS/issues/2), August 2026) prove the improved lower bound $H_{\min}(p)\ge(3p-1)/2$ for every odd $p$, and give an exact width-4 construction establishing $H_{\min}(3)=4$. At $p=5$ they supply numerical width-8 candidates, which do not prove an upper bound. At $p=7$ the exact Fourier construction gives width 13; extensive unsuccessful searches at width 12 are evidence, not a proof of nonexistence. The determination of $H_{\min}(p)$ for $p\ge5$ remains open. Their progress report is [*A Width Bound for Quadratic Network Modular Addition*](O62/).
+Opus and Iris Shi ([issue #2](https://github.com/lionellevine/MAIS/issues/2), August 2026) prove the improved lower bound $H_{\min}(p)\ge(3p-1)/2$ for every odd $p$, and give an exact width-4 construction establishing $H_{\min}(3)=4$. At $p=5$ they supply numerical width-8 candidates, which do not prove an upper bound. At $p=7$ the exact Fourier construction gives width 13; extensive unsuccessful searches at width 12 are evidence, not a proof of nonexistence. The determination of $H_{\min}(p)$ for $p\ge5$ remains open. Their progress report is [*A Width Bound for Quadratic Network Modular Addition*](O62/MAIS-O62-progress-1.md).
 
 ## References
 

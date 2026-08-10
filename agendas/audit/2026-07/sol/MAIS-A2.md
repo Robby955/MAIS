@@ -16,15 +16,15 @@ The cited Richens--Everitt result does not quantify only over the local chance-v
 
 Here is a counterexample to the note's exact clause. Let the chance variables be `O,H`, let the agent observe `O`, let the graph be `O -> H`, and take both `O,H` as utility parents. Write
 
-\[
+$$
 g(o,h)=u(1,o,h)-u(0,o,h).
-\]
+$$
 
 Choose utility values satisfying
 
-\[
+$$
 g(0,0)<0<g(0,1),\qquad g(1,0)>0,\quad g(1,1)>0.
-\]
+$$
 
 Take all causal probabilities in the interior and vary only
 `b=P(H=1 | O=1)` over a nontrivial interval, holding the other entries fixed. At observation `O=1`, action 1 is strictly optimal under every profile having positive mass there, whatever `b` is, because both possible utility gaps are positive. At observation `O=0`, behavior depends on `P(H | O=0)` and on the chosen local transforms, but not on `b`. These facts persist under arbitrary mixtures because the corresponding unnormalised gaps are linear in the mixture. At zero-probability observations choose the same tie action. Thus every value of `b` in the interval admits the same assignment of optimal policies for every mixture in the note's `Sigma(C)`.
@@ -41,15 +41,15 @@ Masking `O` removes the obstruction: once the decision cannot condition on `O`, 
 
 The note says that the analyst observes only the first-action function `f_pi`, but line 296 includes an environment `E'` only when
 
-\[
+$$
 A(E,n,\delta)\cap A(E',n,\delta)\ne\varnothing,
-\]
+$$
 
 which requires one and the same complete history-dependent policy to be bounded in both environments. First-action data instead make two environments indistinguishable whenever there are possibly different agents `pi` and `pi'` with
 
-\[
+$$
 \pi\in A(E,n,\delta),\quad \pi'\in A(E',n,\delta),\quad f_\pi=f_{\pi'}.
-\]
+$$
 
 Policies can agree on every queried first action and differ after the first transition, so the two relations are not equivalent. The displayed `epsilon*` is a valid but generally smaller full-policy-sharing radius, not “the error that no analyst can beat” from first-action observations. The upper bound in line 298 is valid for that narrower object; it does not by itself bound the correctly defined first-action identified set. Problem 4.12 is therefore mathematically interpretable as written, but it addresses a stronger observation model than its surrounding prose and intended lower-bound construction claim.
 
@@ -61,9 +61,9 @@ Policies can agree on every queried first action and differ after the first tran
 
 The requested “blow-up” of the constant as `beta -> infinity` is backwards. For the elementary local model
 
-\[
+$$
 P(Y=1\mid q)=\mathrm{logit}^{-1}\!\bigl(\beta a(q-q_*)\bigr),
-\]
+$$
 
 the Fisher information at the switch is `beta^2 a^2/4`, so local threshold error scales as `1/(beta sqrt(N))`, improving rather than deteriorating with `beta`. In the limit `beta=infinity`, the channel becomes the noiseless sign oracle used for bisection, which can achieve exponentially small one-dimensional localisation error in the number of adaptive queries. Only `beta -> 0` necessarily destroys information. There may be a non-uniform crossover between a smooth parametric regime and a noiseless-search regime, but it cannot be represented by a universally exploding `c(sk,lambda,beta)` at large `beta`. This is also consistent with the logit identification literature beginning with [Magnac--Thesmar](https://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00306); recent reward/model-identifiability work likewise treats rationality parameters as observation-model parameters rather than regret floors, e.g. [Skalse--Abate, AAAI 2025](https://ojs.aaai.org/index.php/AAAI/article/view/34977).
 

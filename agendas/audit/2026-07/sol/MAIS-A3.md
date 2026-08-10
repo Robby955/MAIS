@@ -4,7 +4,7 @@
 
 ## Summary verdict
 
-This file has significant issues and is not publication-ready in its current form, although its two displayed proofs (Propositions 3.1 and 3.2) and its classical geometric/compressed-sensing theorems check out. The most serious problems are internal rather than merely bibliographic: Conjecture 4.4 is false under its stated hypotheses (an explicit orthogonal two-feature, all-on counterexample satisfies both displayed bounds), while Conjecture 4.5 is already an elementary theorem, with the stronger values \(\lambda _0=1\) and \(C=0\). Problem 4.3 cannot characterize “which pairs merge” from the listed scalar summaries, Problem 4.7's claim of openness “even for \(k=\lceil\log m\rceil\)” ignores polynomial-identifiability/recovery results going back at least to Spielman--Wang--Wright and Awasthi--Vijayaraghavan, and the 2026 related-work account misses direct work on feature splitting and dictionary-level amortization. Several global prose claims also overgeneralize the very special two-feature, constant-coefficient propositions, and the statement that a learned ReLU encoder is one ISTA step is false without tying \(W,b\) to the decoder and step size. The TeX compiles successfully, but the mathematical/open-status defects require revision before publication.
+This file has significant issues and is not publication-ready in its current form, although its two displayed proofs (Propositions 3.1 and 3.2) and its classical geometric/compressed-sensing theorems check out. The most serious problems are internal rather than merely bibliographic: Conjecture 4.4 is false under its stated hypotheses (an explicit orthogonal two-feature, all-on counterexample satisfies both displayed bounds), while Conjecture 4.5 is already an elementary theorem, with the stronger values $\lambda _0=1$ and $C=0$. Problem 4.3 cannot characterize “which pairs merge” from the listed scalar summaries, Problem 4.7's claim of openness “even for $k=\lceil\log m\rceil$” ignores polynomial-identifiability/recovery results going back at least to Spielman--Wang--Wright and Awasthi--Vijayaraghavan, and the 2026 related-work account misses direct work on feature splitting and dictionary-level amortization. Several global prose claims also overgeneralize the very special two-feature, constant-coefficient propositions, and the statement that a learned ReLU encoder is one ISTA step is false without tying $W,b$ to the decoder and step size. The TeX compiles successfully, but the mathematical/open-status defects require revision before publication.
 
 ## Findings, ordered by severity
 
@@ -12,39 +12,39 @@ This file has significant issues and is not publication-ready in its current for
 
 **Location:** lines 222--232, especially the hypotheses at lines 223--229 and the claimed explanation at line 232.
 
-Take \(m=2\), choose any sufficiently large \(n\), let \(v_1=e_1,v_2=e_2\), and take \(p=1\). Then \(\mu=0\), so the first displayed condition is automatic, and for every proposed absolute \(c>0\) the second holds once
-\[
+Take $m=2$, choose any sufficiently large $n$, let $v_1=e_1,v_2=e_2$, and take $p=1$. Then $\mu=0$, so the first displayed condition is automatic, and for every proposed absolute $c>0$ the second holds once
+$$
 n\ge \log 2\,\bigl((2+\log 2)/c\bigr)^2.
-\]
-The data are \(y=a e_1+b e_2\), with independent \(a,b\sim\mathrm{Unif}[1,2]\). Define
-\[
+$$
+The data are $y=a e_1+b e_2$, with independent $a,b\sim\mathrm{Unif}[1,2]$. Define
+$$
 u_1=(2e_1+e_2)/\sqrt5,\qquad u_2=(e_1+2e_2)/\sqrt5.
-\]
-Every such \(y\) has the nonnegative exact code
-\[
+$$
+Every such $y$ has the nonnegative exact code
+$$
 z={\sqrt5\over3}(2a-b,\,2b-a),
 \qquad \|z\|_1={\sqrt5\over3}(a+b),
-\]
-so \(F_\lambda(u_1,u_2)\le\sqrt5\lambda\). At the true dictionary, for \(0<\lambda<1\), coordinatewise soft thresholding gives \(F_\lambda(\Phi)=3\lambda-\lambda^2\). More strongly, any dictionary that \(C\lambda\)-recovers \(\Phi\) has columns within \(O(\sqrt\lambda)\) of \(e_1,e_2\); projecting a candidate reconstruction onto \(e_1+e_2\) gives uniformly
-\[
+$$
+so $F_\lambda(u_1,u_2)\le\sqrt5\lambda$. At the true dictionary, for $0<\lambda<1$, coordinatewise soft thresholding gives $F_\lambda(\Phi)=3\lambda-\lambda^2$. More strongly, any dictionary that $C\lambda$-recovers $\Phi$ has columns within $O(\sqrt\lambda)$ of $e_1,e_2$; projecting a candidate reconstruction onto $e_1+e_2$ gives uniformly
+$$
 F_\lambda(\Psi)/\lambda\ge 3-O(\sqrt\lambda),
-\]
-whereas the slanted dictionary has quotient at most \(\sqrt5\). Thus, for all sufficiently small \(\lambda\), no global minimizer can \(C\lambda\)-recover \(\Phi\). This refutes the conjecture for every proposed pair of constants \(c,C\).
+$$
+whereas the slanted dictionary has quotient at most $\sqrt5$. Thus, for all sufficiently small $\lambda$, no global minimizer can $C\lambda$-recover $\Phi$. This refutes the conjecture for every proposed pair of constants $c,C$.
 
-The prose at line 232 notices the \(p=1\) obstruction but incorrectly says the second inequality removes it. It removes it only in some overcomplete scalings; because the conjecture allows \(m\le n\) and arbitrarily large unused ambient dimension, the right-hand side grows with \(n\). A repair needs a direct upper bound on \(p\) or expected support size that does not weaken when unused dimensions are added (and probably an explicit \(m>n\) regime).
+The prose at line 232 notices the $p=1$ obstruction but incorrectly says the second inequality removes it. It removes it only in some overcomplete scalings; because the conjecture allows $m\le n$ and arbitrarily large unused ambient dimension, the right-hand side grows with $n$. A repair needs a direct upper bound on $p$ or expected support size that does not weaken when unused dimensions are added (and probably an explicit $m>n$ regime).
 
 ### 2. Conjecture 4.5 is already proved by a pointwise radial lower bound
 
 **Location:** lines 234--242; repeated as allegedly open at lines 220, 303, 315, 325, and 339.
 
-For a unit-column dictionary \(\Psi\), any nonnegative code \(z\), \(r=\|y\|\), and \(t=\|z\|_1\),
-\[
+For a unit-column dictionary $\Psi$, any nonnegative code $z$, $r=\|y\|$, and $t=\|z\|_1$,
+$$
 \|\Psi z\|\le t,
 \qquad
 \|y-\Psi z\|\ge (r-t)_+.
-\]
+$$
 Consequently
-\[
+$$
 \ell_\lambda(y,\Psi)
 \ge \min_{t\ge0}\left\{\tfrac12(r-t)_+^2+\lambda t\right\}
 =
@@ -52,24 +52,24 @@ Consequently
 \lambda r-\lambda^2/2,&0<\lambda<r,\\
 r^2/2,&\lambda\ge r.
 \end{cases}
-\]
-In Conjecture 4.5 the two nonzero data rays are \(v_1\), of norm 1, and \(v_1+v_2\), of norm \(2\cos(\theta/2)\ge\sqrt2\). For every \(0<\lambda<1\), the dictionary \(\{v_1,w\}\) attains this lower bound separately on both events by radial soft thresholding. Equality on two positive-probability, distinct rays forces one atom on each ray, so \(\{v_1,w\}\) is the unique global minimizer up to permutation. Since \(\theta\le\pi/2\),
-\[
+$$
+In Conjecture 4.5 the two nonzero data rays are $v_1$, of norm 1, and $v_1+v_2$, of norm $2\cos(\theta/2)\ge\sqrt2$. For every $0<\lambda<1$, the dictionary $\{v_1,w\}$ attains this lower bound separately on both events by radial soft thresholding. Equality on two positive-probability, distinct rays forces one atom on each ray, so $\{v_1,w\}$ is the unique global minimizer up to permutation. Since $\theta\le\pi/2$,
+$$
 \max_j\langle u_j,v_2\rangle
 =\max\{\cos\theta,\cos(\theta/2)\}
 =\cos(\theta/2).
-\]
+$$
 Thus the conjecture holds with the strictly stronger constants
-\[
+$$
 \lambda_0=1,\qquad C=0.
-\]
-No compactness or limiting argument is needed. This also settles the \(b=0\) face of Problem 5.1 exactly, contrary to line 303's suggestion that the starter calculation is needed to prove or refute the conjecture.
+$$
+No compactness or limiting argument is needed. This also settles the $b=0$ face of Problem 5.1 exactly, contrary to line 303's suggestion that the starter calculation is needed to prove or refute the conjecture.
 
 ### 3. The claimed “support-statistics characterization” in Problem 4.3 is not determined by its inputs
 
 **Location:** lines 211--218; also abstract line 30, survey quotation line 40, and summary line 339.
 
-Problem 4.3 asks for recovery, merging, and “which pairs merge” as a function of coherence, marginal rates, the single maximum \(r(\pi)\), and solo-firing rates. These statistics discard the pairwise and higher-order information needed for that answer. For example, with four equally frequent features, give equal mass to every singleton and equal mass either to the paired supports \(\{1,2\},\{3,4\}\) or to \(\{1,3\},\{2,4\}\). The two laws have identical labeled marginals, identical labeled solo rates, identical sparsity, and identical maximum co-occurrence ratio, but different pairs co-occur/nest. A scalar coherence likewise discards the full Gram matrix and cannot identify which geometric pair is favored. Hence an exact “which pairs” characterization cannot be a function of the displayed arguments.
+Problem 4.3 asks for recovery, merging, and “which pairs merge” as a function of coherence, marginal rates, the single maximum $r(\pi)$, and solo-firing rates. These statistics discard the pairwise and higher-order information needed for that answer. For example, with four equally frequent features, give equal mass to every singleton and equal mass either to the paired supports $\{1,2\},\{3,4\}$ or to $\{1,3\},\{2,4\}$. The two laws have identical labeled marginals, identical labeled solo rates, identical sparsity, and identical maximum co-occurrence ratio, but different pairs co-occur/nest. A scalar coherence likewise discards the full Gram matrix and cannot identify which geometric pair is favored. Hence an exact “which pairs” characterization cannot be a function of the displayed arguments.
 
 The problem can be made well-posed by asking for sufficient/necessary bounds based on these summaries, or by admitting the full pairwise conditional matrix/full support law and full Gram matrix. As written, part (2) makes the headline problem ill-posed as a requested characterization.
 
@@ -77,7 +77,7 @@ The problem can be made well-posed by asking for sufficient/necessary bounds bas
 
 **Location:** abstract line 30 and conclusion line 339; compare the actual hypotheses at lines 146--184.
 
-The propositions are correct, but they concern exactly two atoms, exactly two or three support events, deterministic unit coefficients, no noise, \(M=m=2\), and the constrained objective. They do not prove that nested supports “whenever” present force merging throughout Definition 2.2's model class, nor that support correlations “alone decide identifiability.” Coefficient-law support can change even feasibility. For example, retain supports \(\{1\}\) and \(\{1,2\}\) but use an unbounded positive coefficient law with finite second moment (e.g. exponential). Joint-event directions approach both boundary rays because the coefficient ratio has support \((0,\infty)\); any two-ray cone of finite constrained cost must contain that full limiting sector, and the same angular monotonicity used in Proposition 3.2 favors the true boundary rays. Feature 2 remains nested, but Proposition 3.1's fixed joint ray and forced merged atom disappear.
+The propositions are correct, but they concern exactly two atoms, exactly two or three support events, deterministic unit coefficients, no noise, $M=m=2$, and the constrained objective. They do not prove that nested supports “whenever” present force merging throughout Definition 2.2's model class, nor that support correlations “alone decide identifiability.” Coefficient-law support can change even feasibility. For example, retain supports $\{1\}$ and $\{1,2\}$ but use an unbounded positive coefficient law with finite second moment (e.g. exponential). Joint-event directions approach both boundary rays because the coefficient ratio has support $(0,\infty)$; any two-ray cone of finite constrained cost must contain that full limiting sector, and the same angular monotonicity used in Proposition 3.2 favors the true boundary rays. Feature 2 remains nested, but Proposition 3.1's fixed joint ray and forced merged atom disappear.
 
 The honest claim is that one particular nested-support model merges and one particular solo-firing model recovers. Lines 30 and 339 turn examples into a universal theorem.
 
@@ -85,17 +85,17 @@ The honest claim is that one particular nested-support model merges and one part
 
 **Location:** lines 258--262 and the classical/algorithmic survey at lines 319--321.
 
-The blanket statement “open even for \(k=\lceil\log m\rceil\)” is untenable without a much narrower quantifier. [Spielman--Wang--Wright](https://proceedings.mlr.press/v23/spielman12.html) prove polynomial-sample uniqueness/recovery for arbitrary square invertible dictionaries under sparse random coefficients. Choosing a Bernoulli rate below \(k/m\) and conditioning on the positive-probability event that all polynomially many sampled columns have support at most \(k=\lceil\log m\rceil\) gives existential polynomial-size, \(k\)-sparse datasets in the allowed square regime. More directly for overcomplete dictionaries, [Awasthi--Vijayaraghavan, FOCS 2018](https://arxiv.org/abs/1804.08603) state polynomial identifiability for near-linear sparsity under RIP and mild triple-occurrence support conditions; their paper explicitly contrasts this with the earlier \(n^{O(k)}\) bounds.
+The blanket statement “open even for $k=\lceil\log m\rceil$” is untenable without a much narrower quantifier. [Spielman--Wang--Wright](https://proceedings.mlr.press/v23/spielman12.html) prove polynomial-sample uniqueness/recovery for arbitrary square invertible dictionaries under sparse random coefficients. Choosing a Bernoulli rate below $k/m$ and conditioning on the positive-probability event that all polynomially many sampled columns have support at most $k=\lceil\log m\rceil$ gives existential polynomial-size, $k$-sparse datasets in the allowed square regime. More directly for overcomplete dictionaries, [Awasthi--Vijayaraghavan, FOCS 2018](https://arxiv.org/abs/1804.08603) state polynomial identifiability for near-linear sparsity under RIP and mild triple-occurrence support conditions; their paper explicitly contrasts this with the earlier $n^{O(k)}$ bounds.
 
-Those results do not obviously settle the strongest possible reading—every dimension \(n\ge2k\), almost every merely-spark dictionary, exact uniqueness against every unrestricted competing \(B\)—so I classify the item `possibly-resolved`, not cleanly `resolved`. The file must specify whether the quantifier is “for every \(n\ge2k\),” whether genuine overcompleteness/minimal dimension is required, and why the cited random/polynomial-identifiability results do not meet its definition. In its present form the square case and the sentence “even for log m” make the claimed novelty misleading.
+Those results do not obviously settle the strongest possible reading—every dimension $n\ge2k$, almost every merely-spark dictionary, exact uniqueness against every unrestricted competing $B$—so I classify the item `possibly-resolved`, not cleanly `resolved`. The file must specify whether the quantifier is “for every $n\ge2k$,” whether genuine overcompleteness/minimal dimension is required, and why the cited random/polynomial-identifiability results do not meet its definition. In its present form the square case and the sentence “even for log m” make the claimed novelty misleading.
 
 ### 6. The June 2026 splitting theorem substantially overlaps Problem 4.6
 
 **Location:** lines 244--252, especially “nothing is known” at line 252; related-work lines 325 and 335.
 
-[Dalili--Mahdavi, *Subspace-Aware Sparse Autoencoders* (arXiv:2606.06333)](https://arxiv.org/abs/2606.06333) proves that multidimensional features force exponentially many single-direction atoms for small reconstruction error and, more directly, that the end-to-end \(\ell^1\)-regularized SAE objective has a continuous descent path from the true basis to a lower-risk split dictionary. This does not solve the exact two-cap, nonnegative-lasso population problem in 4.6, but it is direct theory of splitting as geometric quantization/objective preference and contradicts the broad statement that nothing is known.
+[Dalili--Mahdavi, *Subspace-Aware Sparse Autoencoders* (arXiv:2606.06333)](https://arxiv.org/abs/2606.06333) proves that multidimensional features force exponentially many single-direction atoms for small reconstruction error and, more directly, that the end-to-end $\ell^1$-regularized SAE objective has a continuous descent path from the true basis to a lower-risk split dictionary. This does not solve the exact two-cap, nonnegative-lasso population problem in 4.6, but it is direct theory of splitting as geometric quantization/objective preference and contradicts the broad statement that nothing is known.
 
-There is also a precision omission: the requested answer is said to be a function of \((\theta,\tau,\lambda,a,b,c,M)\), but spherical-cap quantization and normalized surface measure depend essentially on the ambient dimension \(n\), introduced in the first sentence and then omitted from the parameter list.
+There is also a precision omission: the requested answer is said to be a function of $(\theta,\tau,\lambda,a,b,c,M)$, but spherical-cap quantization and normalized surface measure depend essentially on the ambient dimension $n$, introduced in the first sentence and then omitted from the parameter list.
 
 ### 7. The dictionary-level amortization comparison has been examined, contrary to line 275
 
@@ -103,17 +103,17 @@ There is also a precision omission: the requested answer is said to be a functio
 
 [Sun--Wang--Hu, *The Price of Amortized Inference in Sparse Autoencoders*, ICLR 2026](https://openreview.net/forum?id=33wY6AI13k) explicitly studies how a shared amortized encoder distorts learned features and ties amortization to absorption, splitting, dead, and dense latents, comparing amortized, semi-amortized, and non-amortized methods. [O'Neill--Gumran--Klindt](https://proceedings.mlr.press/v267/o-neill25a.html) remains the clean code-level impossibility result. The ICLR paper does not appear to prove the exact population-global-minimizer separation requested in 4.8(2), so the precise problem remains open-with-related-work, but “That dictionary-level comparison ... remains unexamined” is false.
 
-The nonattainment fallback at line 272 is also not mathematically adequate. If \((W,b)\) diverges, a minimizing sequence need not have a limit point in the full domain. Compactness only guarantees a subsequential limit of the dictionary component \(\Psi\). The statement should define the set of projected dictionary accumulation points of minimizing sequences, and specify whether “every” or “some” minimizing sequence is intended.
+The nonattainment fallback at line 272 is also not mathematically adequate. If $(W,b)$ diverges, a minimizing sequence need not have a limit point in the full domain. Compactness only guarantees a subsequential limit of the dictionary component $\Psi$. The statement should define the set of projected dictionary accumulation points of minimizing sequences, and specify whether “every” or “some” minimizing sequence is intended.
 
 ### 8. A generic learned ReLU encoder is not “one ISTA step”
 
 **Location:** lines 128--132 and repeated at line 275.
 
-For decoder \(\Psi\), step size \(\eta\), and zero initialization, one nonnegative ISTA step is
-\[
+For decoder $\Psi$, step size $\eta$, and zero initialization, one nonnegative ISTA step is
+$$
 z^{(1)}=\mathrm{ReLU}(\eta\Psi^\top y-\eta\lambda\mathbf1).
-\]
-Thus \(\mathrm{ReLU}(Wy+b)\) is literally that step only when \(W=\eta\Psi^\top\) and \(b=-\eta\lambda\mathbf1\). The file learns arbitrary \(W,b\) jointly and imposes neither relation. It is more accurate to call the encoder a one-layer learned-thresholding/LISTA-style amortizer. Daubechies--Defrise--De Mol establishes iterative thresholding, but does not justify identifying arbitrary encoder weights and biases with a decoder-tied ISTA step.
+$$
+Thus $\mathrm{ReLU}(Wy+b)$ is literally that step only when $W=\eta\Psi^\top$ and $b=-\eta\lambda\mathbf1$. The file learns arbitrary $W,b$ jointly and imposes neither relation. It is more accurate to call the encoder a one-layer learned-thresholding/LISTA-style amortizer. Daubechies--Defrise--De Mol establishes iterative thresholding, but does not justify identifying arbitrary encoder weights and biases with a decoder-tied ISTA step.
 
 The phrase “an SAE is the same objective” also suppresses the learned decoder/output bias used in standard vanilla SAE formulations. A centered idealization is defensible, but it must be labeled as such rather than attributed literally to all practical SAEs.
 
@@ -121,7 +121,7 @@ The phrase “an SAE is the same objective” also suppresses the learned decode
 
 **Location:** lines 323--325.
 
-Line 323 says “no theorem locates the global minimizers” of reconstruction-plus-sparsity objectives. Yet the next paragraph cites [Tang et al., arXiv:2512.05534](https://arxiv.org/abs/2512.05534), whose abstract explicitly says it “characterize[s] its global solution set, non-identifiability, and spurious optima” for a unified sparse-dictionary-learning formulation. The objectives/hypotheses may differ from the population nonnegative lasso value function \(F_\lambda\), in which case the file should state the exact distinction. As written, “locality remains the frontier” and the cited global-solution characterization appear contradictory.
+Line 323 says “no theorem locates the global minimizers” of reconstruction-plus-sparsity objectives. Yet the next paragraph cites [Tang et al., arXiv:2512.05534](https://arxiv.org/abs/2512.05534), whose abstract explicitly says it “characterize[s] its global solution set, non-identifiability, and spurious optima” for a unified sparse-dictionary-learning formulation. The objectives/hypotheses may differ from the population nonnegative lasso value function $F_\lambda$, in which case the file should state the exact distinction. As written, “locality remains the frontier” and the cited global-solution characterization appear contradictory.
 
 The same paragraph omits the ICLR 2026 amortization paper and the June 2026 subspace/splitting theorem above. O'Neill et al. is also now an ICML 2025 paper, not only an arXiv preprint.
 
@@ -129,7 +129,7 @@ The same paragraph omits the ICLR 2026 amortization paper and the June 2026 subs
 
 **Location:** lines 311--315.
 
-The item leaves undefined the distribution meant by “uniformly random dictionary,” the interpolation law beyond an example, the grids for \(\gamma,\lambda,M\), the merge tolerances \((\varepsilon,\delta)\), the split tolerance, optimizer/schedule/stopping rule, sample sizes, number of seeds, and uncertainty estimates. “Standard optimizers” and “many random initializations” do not determine an experiment, and \(\lfloor\gamma m/2\rfloor\) gives a stepwise rather than smooth interpolation. Consequently the requested table is not reproducible as written.
+The item leaves undefined the distribution meant by “uniformly random dictionary,” the interpolation law beyond an example, the grids for $\gamma,\lambda,M$, the merge tolerances $(\varepsilon,\delta)$, the split tolerance, optimizer/schedule/stopping rule, sample sizes, number of seeds, and uncertainty estimates. “Standard optimizers” and “many random initializations” do not determine an experiment, and $\lfloor\gamma m/2\rfloor$ gives a stepwise rather than smooth interpolation. Consequently the requested table is not reproducible as written.
 
 It also overlaps the hierarchical synthetic experiments in [Matryoshka SAEs](https://proceedings.mlr.press/v267/bussmann25a.html), which use child-implies-parent feature trees and measure absorption, as well as newer controlled ground-truth benchmarks such as [Sanity Checks for SAEs](https://openreview.net/forum?id=bEYHoD7fCj). A particular preregistered sweep could still be useful, but “publishable” and novelty cannot be asserted from this underspecified recipe.
 
@@ -138,9 +138,9 @@ It also overlaps the hierarchical synthetic experiments in [Matryoshka SAEs](htt
 **Locations:** lines 55, 70, 126, 242, 284--295, 319--327, and 341--425.
 
 - Line 55 calls ReLU “the standard” nonlinearity, although modern transformers commonly use GELU/SiLU. This is harmless for the formal model but inaccurate motivation.
-- “Every 2k columns are linearly independent” is vacuous when fewer than \(2k\) columns exist; the standard formulation is \(\mathrm{spark}(\Phi)>2k\), or independence of every subset of at most \(2k\) columns.
-- For \(F_0\), “some minimizing code” is undefined on samples outside the cone (where the infimum is \(+\infty\)); liveness should be restricted to dictionaries/samples with a finite constrained cost.
-- Line 295's “piecewise-polynomial integral” is false in parameters. Already \(\int_0^1\mathrm{ReLU}(wx+b)^2dx\) contains a \(b^3/w\) term when the threshold lies inside \([0,1]\); the loss is piecewise rational/semialgebraic, not generally polynomial.
+- “Every 2k columns are linearly independent” is vacuous when fewer than $2k$ columns exist; the standard formulation is $\mathrm{spark}(\Phi)>2k$, or independence of every subset of at most $2k$ columns.
+- For $F_0$, “some minimizing code” is undefined on samples outside the cone (where the infimum is $+\infty$); liveness should be restricted to dictionaries/samples with a finite constrained cost.
+- Line 295's “piecewise-polynomial integral” is false in parameters. Already $\int_0^1\mathrm{ReLU}(wx+b)^2dx$ contains a $b^3/w$ term when the threshold lies inside $[0,1]$; the loss is piecewise rational/semialgebraic, not generally polynomial.
 - The classical packing, Welch, RIP, dictionary-learning, and frame-potential claims are broadly correct. Johnson--Lindenstrauss is an indirect citation for the spherical packing proposition rather than a direct statement of it, and the Gaussian RIP sentence in Theorem 2.5 is a separate standard result rather than something established by the two sharp-constant citations alone.
 - `latexmk` completed successfully. Remaining warnings are overfull boxes (notably lines 47--48 and 105--109) and underfull bibliography/vbox warnings, not correctness failures.
 
@@ -148,23 +148,23 @@ It also overlaps the hierarchical synthetic experiments in [Matryoshka SAEs](htt
 
 | Result or claim | Verdict | Audit note |
 |---|---|---|
-| Proposition 2.3 (almost-orthogonal packing), lines 89--93 | `correct` | The exponential \(e^{c\varepsilon^2 n}\) packing follows from spherical concentration and a union bound; for small \(\varepsilon^2n\), the floor permits the trivial one-vector case. The JL citation is indirect. |
+| Proposition 2.3 (almost-orthogonal packing), lines 89--93 | `correct` | The exponential $e^{c\varepsilon^2 n}$ packing follows from spherical concentration and a union bound; for small $\varepsilon^2n$, the floor permits the trivial one-vector case. The JL citation is indirect. |
 | Theorem 2.4 (Welch), lines 95--100 | `correct` | Bound and ETF equality description are correct. |
-| Theorem 2.5 (compressed sensing), lines 102--106 | `correct` | \(\delta_{2s}<1/\sqrt2\) is the sharp uniform basis-pursuit threshold; normalized Gaussian matrices satisfy the stated order of measurements with the usual fixed-distortion/high-probability constants. |
-| Coding-cost minimizer claim, lines 112--126 | `correct-with-gaps` | For \(\lambda>0\), coercivity from \(\lambda\|z\|_1\) gives a nonempty compact convex argmin. The analogous liveness convention for \(F_0\) needs a finite-feasibility qualification. |
-| “SAE is one ISTA step,” lines 128--132 | `flawed` | Only true under \(W=\eta\Psi^\top\), \(b=-\eta\lambda\mathbf1\); arbitrary learned \(W,b\) is not an ISTA iterate. |
+| Theorem 2.5 (compressed sensing), lines 102--106 | `correct` | $\delta_{2s}<1/\sqrt2$ is the sharp uniform basis-pursuit threshold; normalized Gaussian matrices satisfy the stated order of measurements with the usual fixed-distortion/high-probability constants. |
+| Coding-cost minimizer claim, lines 112--126 | `correct-with-gaps` | For $\lambda>0$, coercivity from $\lambda\|z\|_1$ gives a nonempty compact convex argmin. The analogous liveness convention for $F_0$ needs a finite-feasibility qualification. |
+| “SAE is one ISTA step,” lines 128--132 | `flawed` | Only true under $W=\eta\Psi^\top$, $b=-\eta\lambda\mathbf1$; arbitrary learned $W,b$ is not an ISTA iterate. |
 | Proposition 3.1 (nesting forces merging), lines 146--162 | `correct` | The triangle inequality, equality condition, uniqueness of the two ray atoms, and value comparison all check. |
-| Coherence comparison/absorption discussion, line 164 | `correct-with-gaps` | The equality threshold \(\theta=2\pi/3\) is correct and the two-feature analogy to absorption is apt; it should not be generalized to all nested-support models. |
-| Proposition 3.2 (solo firing), lines 168--184 | `correct` | Cone parametrization, Cramer's-rule formula, both derivatives, strictness from \(a,b>0\), and boundary minimum are correct. |
+| Coherence comparison/absorption discussion, line 164 | `correct-with-gaps` | The equality threshold $\theta=2\pi/3$ is correct and the two-feature analogy to absorption is apt; it should not be generalized to all nested-support models. |
+| Proposition 3.2 (solo firing), lines 168--184 | `correct` | Cone parametrization, Cramer's-rule formula, both derivatives, strictness from $a,b>0$, and boundary minimum are correct. |
 | Separability/anchor-word analogy, line 186 | `correct` | Solo pure events are the relevant NMF/topic-model anchor condition. |
-| Merge example, line 207 | `correct` | For \(w\), coefficients \(\alpha=\beta=(2\cos(\theta/2))^{-1}>1/2\), and the proposed \(\delta\) meets all inequalities. |
-| Random coherence scaling, line 232 | `correct` | IID Haar columns have \(\mu=O(\sqrt{\log m/n})\) in the normal parameter range; the subsequent claim that the bound excludes \(p=1\) is false. |
-| Penalized radial-zero threshold, line 242 | `correct` | A single-ray nonnegative lasso codes zero exactly when \(\lambda\ge\|y\|\). The same radial calculation actually proves Conjecture 4.5. |
+| Merge example, line 207 | `correct` | For $w$, coefficients $\alpha=\beta=(2\cos(\theta/2))^{-1}>1/2$, and the proposed $\delta$ meets all inequalities. |
+| Random coherence scaling, line 232 | `correct` | IID Haar columns have $\mu=O(\sqrt{\log m/n})$ in the normal parameter range; the subsequent claim that the bound excludes $p=1$ is false. |
+| Penalized radial-zero threshold, line 242 | `correct` | A single-ray nonnegative lasso codes zero exactly when $\lambda\ge\|y\|$. The same radial calculation actually proves Conjecture 4.5. |
 | Classical uniqueness counts, lines 319 and 262 | `correct-with-gaps` | The cited exhaustive-support counts and stability claims track Aharon--Elad--Bruckstein, Hillar--Sommer, and Garfinkle--Hillar, but they are not the full state of polynomial identifiability. |
 | Efficient-algorithm survey, line 321 | `correct-with-gaps` | Spielman, Sun--Qu--Wright, Arora/Agarwal, Barak et al., and Novikov--White support the broad regimes stated. “Every” result having independent feature supports is too broad, and Awasthi--Vijayaraghavan explicitly treats largely arbitrary supports plus a small random portion. |
 | Penalized-estimator survey, line 323 | `correct-with-gaps` | Gribonval--Jenatton--Bach is a local-minimum result and Hu/Sun use a different volume criterion. The blanket global-frontier sentence needs reconciliation with Tang et al.'s claimed global solution-set theorem. |
 | Interpretability survey, line 325 | `correct-with-gaps` | Most attributions match the cited abstracts/results. It omits direct 2026 splitting/amortization work and overstates Matryoshka as “the standard” remedy. |
-| Frame-potential claim, lines 284 and 309 | `correct` | Unit-norm tight frames are exactly the global minimizers of the frame potential for \(m\ge n\). |
+| Frame-potential claim, lines 284 and 309 | `correct` | Unit-norm tight frames are exactly the global minimizers of the frame potential for $m\ge n$. |
 | Piecewise-polynomial loss claim, line 295 | `flawed` | Parametric integration across moving ReLU breakpoints introduces denominators; it is generally piecewise rational/semialgebraic. |
 
 ## Per-item precision and openness
@@ -172,13 +172,13 @@ It also overlaps the hierarchical synthetic experiments in [Matryoshka SAEs](htt
 | Numbered item | Precision | Openness verdict | Reason |
 |---|---|---|---|
 | Problem 4.3 | `ill-posed` | `open-with-related-work` | The listed summaries do not determine pair identities or full geometry; no exact repaired characterization was found. Tang 2026, Dorrell 2026, and current SAE identifiability work overlap. |
-| Conjecture 4.4 | `well-posed` | `resolved` | Resolved negatively by the explicit \(m=2,p=1\) orthogonal counterexample above. |
-| Conjecture 4.5 | `well-posed` | `resolved` | Resolved positively by the radial lower bound, with \(\lambda_0=1,C=0\). |
+| Conjecture 4.4 | `well-posed` | `resolved` | Resolved negatively by the explicit $m=2,p=1$ orthogonal counterexample above. |
+| Conjecture 4.5 | `well-posed` | `resolved` | Resolved positively by the radial lower bound, with $\lambda_0=1,C=0$. |
 | Problem 4.6 | `minor-issues` | `open-with-related-work` | Ambient dimension is omitted from the answer's parameter list. Dalili--Mahdavi directly proves objective-driven multidimensional feature splitting, but not this exact two-cap phase diagram. |
-| Problem 4.7 | `minor-issues` | `possibly-resolved` | The quantifier over \(n\) and intended overcomplete regime are unclear; polynomial identifiability/recovery results cover important allowed regimes, including log sparsity. |
+| Problem 4.7 | `minor-issues` | `possibly-resolved` | The quantifier over $n$ and intended overcomplete regime are unclear; polynomial identifiability/recovery results cover important allowed regimes, including log sparsity. |
 | Problem 4.8 | `minor-issues` | `open-with-related-work` | Projected limits under nonattainment need definition. ICLR 2026 directly studies dictionary distortion from amortization, but the exact global-minimizer separation was not found. |
 | Conjecture 4.9 | `well-posed` | `open-with-related-work` | Critical-point/tight-frame and large-size results overlap; no global pentagon theorem was found. |
-| Problem 5.1 | `well-posed` | `open-with-related-work` | The \(b=0\) face is exactly solved above; Dorrell and Chanin give local/two-feature analyses, but no complete five-parameter global diagram was found. |
+| Problem 5.1 | `well-posed` | `open-with-related-work` | The $b=0$ face is exactly solved above; Dorrell and Chanin give local/two-feature analyses, but no complete five-parameter global diagram was found. |
 | Problem 5.2 | `well-posed` | `open-with-related-work` | No source proving global one-active-feature pentagon optimality was found; Chen et al. proves regular polygons are critical, not globally minimal. |
 | Problem 5.3 | `ill-posed` | `open-with-related-work` | The experiment is not reproducibly specified and overlaps existing hierarchical synthetic/ground-truth SAE benchmarks. |
 
@@ -261,7 +261,7 @@ Follow-up geometry queries:
 - `"regular pentagon" "Toy Models of Superposition" proof global`
 - `2026 "one-active-feature" pentagon ReLU autoencoder`
 
-Evidence: [Chen et al.](https://arxiv.org/abs/2310.06301) proves regular polygons are critical; [Ivanov et al.](https://arxiv.org/abs/2602.02224) derives tight frames under capacity saturation; [Cowsik--Dolev--Infanger](https://openreview.net/forum?id=rapXZIfwbX) treats a large-size limit. No global \(n=2,m=5\) theorem was found.
+Evidence: [Chen et al.](https://arxiv.org/abs/2310.06301) proves regular polygons are critical; [Ivanov et al.](https://arxiv.org/abs/2602.02224) derives tight frames under capacity saturation; [Cowsik--Dolev--Infanger](https://openreview.net/forum?id=rapXZIfwbX) treats a large-size limit. No global $n=2,m=5$ theorem was found.
 
 ### Problem 5.1
 
@@ -270,7 +270,7 @@ Evidence: [Chen et al.](https://arxiv.org/abs/2310.06301) proves regular polygon
 - `site:openreview.net two feature hierarchical sparse autoencoder analytic phase diagram absorption local global optimum`
 - `site:alignmentforum.org two feature absorption sparse autoencoder analytic model phase diagram`
 
-Evidence: [Chanin et al.](https://arxiv.org/abs/2409.14507) and [Dorrell](https://arxiv.org/abs/2606.02385) are the closest local/two-feature analyses found. The nested \(b=0\) face is solved by Finding 2; the complete diagram was not found.
+Evidence: [Chanin et al.](https://arxiv.org/abs/2409.14507) and [Dorrell](https://arxiv.org/abs/2606.02385) are the closest local/two-feature analyses found. The nested $b=0$ face is solved by Finding 2; the complete diagram was not found.
 
 ### Problem 5.2
 

@@ -13,43 +13,43 @@ This file has significant mathematical and openness issues despite several caref
 **Location:** lines 363--373, especially Problem 5.2 at lines 365--371; repeated claims at lines 437, 447, and 473.
 
 Let
-\[
+$$
 P=I_v-\frac1v\mathbf 1\mathbf 1^{\mathsf T}
-\]
-be output centering. An output softmax is uniform exactly when its logit row times \(P\) is zero. Constant-token contexts \(x=(a,\ldots,a)\) have
-\[
+$$
+be output centering. An output softmax is uniform exactly when its logit row times $P$ is zero. Constant-token contexts $x=(a,\ldots,a)$ have
+$$
 \ell(x)P=E_aUP,
-\]
-independently of \(Q\), \(T\), and the attention weights. Consequently uniform output for every context implies \(EUP=0\). Conversely, if \(EUP=0\), every attention-weighted convex combination in line 352 has centered logit zero, so every output is uniform. Thus
-\[
+$$
+independently of $Q$, $T$, and the attention weights. Consequently uniform output for every context implies $EUP=0$. Conversely, if $EUP=0$, every attention-weighted convex combination in line 352 has centered logit zero, so every output is uniform. Thus
+$$
 W_0=\{(E,Q,U):EUP=0\}
-\]
+$$
 exactly; attention proper is not a higher-order correction to the zero-set geometry.
 
 On every bounded neighborhood, categorical KL from the uniform distribution is two-sided comparable to squared centered-logit norm. Constant contexts give the lower bound and convexity of squared norm gives the upper bound, hence
-\[
+$$
 K(E,Q,U)\asymp \|EUP\|_F^2.
-\]
-Choose an orthonormal \(C\in\mathbb R^{v\times(v-1)}\) spanning \(\mathbf1^\perp\), and put \(\bar U=UC\). Flat \(Q\)-coordinates and the flat all-ones output direction in \(U\) do not change an RLCT. The problem is therefore precisely reduced-rank regression at zero truth with
-\[
+$$
+Choose an orthonormal $C\in\mathbb R^{v\times(v-1)}$ spanning $\mathbf1^\perp$, and put $\bar U=UC$. Flat $Q$-coordinates and the flat all-ones output direction in $U$ do not change an RLCT. The problem is therefore precisely reduced-rank regression at zero truth with
+$$
 (M,N,H,r)=(v,v-1,e,0).
-\]
-Substitution in the file's own Theorem 3.1 gives, for every \(R>0\), the local pair at zero and the minimum over \(W_0\cap\bar B_R\):
-\[
+$$
+Substitution in the file's own Theorem 3.1 gives, for every $R>0$, the local pair at zero and the minimum over $W_0\cap\bar B_R$:
+$$
 (\lambda,m)=
 \begin{cases}
 \left(\dfrac{2e(2v-1)-1-e^2}{8},1\right),&e\le 2v-1\text{ and }e\text{ odd},\\[6pt]
 \left(\dfrac{2e(2v-1)-e^2}{8},2\right),&e\le 2v-1\text{ and }e\text{ even},\\[6pt]
 \left(\dfrac{v(v-1)}2,1\right),&e>2v-1.
 \end{cases}
-\]
-In particular, the case \((v,T,e)=(2,2,1)\) highlighted at line 437 is \((\lambda,m)=(1/2,1)\). The primary reduced-rank source is [Aoyagi--Watanabe (2005)](https://www.sciencedirect.com/science/article/abs/pii/S0893608005000559). Current attention/LLC work such as the [ICLR 2025 refined-LLC paper](https://openreview.net/forum?id=SUc1UOWndp) is empirical and does not supersede this calculation; it does show that the literature search must include current ML venues.
+$$
+In particular, the case $(v,T,e)=(2,2,1)$ highlighted at line 437 is $(\lambda,m)=(1/2,1)$. The primary reduced-rank source is [Aoyagi--Watanabe (2005)](https://www.sciencedirect.com/science/article/abs/pii/S0893608005000559). Current attention/LLC work such as the [ICLR 2025 refined-LLC paper](https://openreview.net/forum?id=SUc1UOWndp) is empirical and does not supersede this calculation; it does show that the literature search must include current ML venues.
 
 ### 2. Question 9.1 is affirmative for the finite-input ReLU model actually stated
 
 **Location:** lines 459--465.
 
-The question does not require a general theory for arbitrary ReLU models. Here there are only \(p^2\) inputs and finitely many hidden units. Parameter space therefore has a finite semialgebraic partition by the signs of all hidden preactivations on all inputs. On each full-dimensional activation cell, every ReLU is either its linear argument or zero, so the Gaussian regression model and its population loss agree with an analytic (indeed polynomial) branch on that cell. Apply the standard analytic singular-learning/zeta argument on each compact semianalytic cell (semianalytic boundary conditions are handled in the same resolution). Cells whose closure contains no exact fit are exponentially negligible. The total evidence is a finite sum of positive branch evidences, so the smallest branch RLCT dominates and, among ties, the largest pole order dominates. The weighted sublevel volume is the same finite sum of branch volumes and has exactly the same minimum exponent and maximum logarithmic power. Hence the answer to Question 9.1 is **yes**, with \((\lambda,m)=(\lambda_{\rm vol},m_{\rm vol})\).
+The question does not require a general theory for arbitrary ReLU models. Here there are only $p^2$ inputs and finitely many hidden units. Parameter space therefore has a finite semialgebraic partition by the signs of all hidden preactivations on all inputs. On each full-dimensional activation cell, every ReLU is either its linear argument or zero, so the Gaussian regression model and its population loss agree with an analytic (indeed polynomial) branch on that cell. Apply the standard analytic singular-learning/zeta argument on each compact semianalytic cell (semianalytic boundary conditions are handled in the same resolution). Cells whose closure contains no exact fit are exponentially negligible. The total evidence is a finite sum of positive branch evidences, so the smallest branch RLCT dominates and, among ties, the largest pole order dominates. The weighted sublevel volume is the same finite sum of branch volumes and has exactly the same minimum exponent and maximum logarithmic power. Hence the answer to Question 9.1 is **yes**, with $(\lambda,m)=(\lambda_{\rm vol},m_{\rm vol})$.
 
 This finite-cell proof does not settle continuous-input or unbounded-architecture ReLU theory, for which [Nagayasu--Watanabe](https://arxiv.org/abs/2303.15739) only gives bounds. It does settle the numbered finite-input question.
 
@@ -59,36 +59,36 @@ There is also an attribution error in line 459. The cited [Lion--Rolin 1997 pape
 
 **Location:** lines 397--430, especially lines 417, 422, and 427.
 
-For every fixed \(\gamma>0\), the factor \(\exp(-\gamma\|w-w^*\|^2/2)\) is simply a fixed smooth positive prior on the compact ball. [Watanabe's 2013 WBIC theorem](https://jmlr.org/papers/v14/watanabe13a.html), Theorem 4 in the paper, applies without an adaptation. With \(\beta_0=1\), it gives
-\[
+For every fixed $\gamma>0$, the factor $\exp(-\gamma\|w-w^*\|^2/2)$ is simply a fixed smooth positive prior on the compact ball. [Watanabe's 2013 WBIC theorem](https://jmlr.org/papers/v14/watanabe13a.html), Theorem 4 in the paper, applies without an adaptation. With $\beta_0=1$, it gives
+$$
 \mathbb E^\beta[nL_n(w)]
 =nL_n(w^*)+\lambda\log n+U_n\sqrt{\lambda\log n/2}+O_p(1).
-\]
-The toy model's global minimum is \(\lambda=1/4\), so division by \(\log n\) proves Problem 6.1(a) immediately. Part (b), where the prior itself varies with \(n\), remains a genuine asymptotic competition problem.
+$$
+The toy model's global minimum is $\lambda=1/4$, so division by $\log n$ proves Problem 6.1(a) immediately. Part (b), where the prior itself varies with $n$, remains a genuine asymptotic competition problem.
 
-For Problem 6.2, restricting to a sufficiently small hard ball makes that ball the compact parameter domain. The same theorem gives convergence to the ball's RLCT, which is the local coefficient by Definition 2.5, and gives the leading \(1/\sqrt{\log n}\) fluctuation term (with the theorem's \(U_n\), asymptotically Gaussian, subject to its possible parity degeneration). What remains open is the requested classification of factorization points attaining the global Aoyagi--Watanabe minimum and any finer fluctuation refinement. Recent relevant work includes [Kurumadani's local RLCT formulas](https://arxiv.org/abs/2408.13030), [geometry of multiplication fibers](https://arxiv.org/abs/2411.19920), and the [2025 local-posterior-sampling benchmark](https://arxiv.org/abs/2507.21449).
+For Problem 6.2, restricting to a sufficiently small hard ball makes that ball the compact parameter domain. The same theorem gives convergence to the ball's RLCT, which is the local coefficient by Definition 2.5, and gives the leading $1/\sqrt{\log n}$ fluctuation term (with the theorem's $U_n$, asymptotically Gaussian, subject to its possible parity degeneration). What remains open is the requested classification of factorization points attaining the global Aoyagi--Watanabe minimum and any finer fluctuation refinement. Recent relevant work includes [Kurumadani's local RLCT formulas](https://arxiv.org/abs/2408.13030), [geometry of multiplication fibers](https://arxiv.org/abs/2411.19920), and the [2025 local-posterior-sampling benchmark](https://arxiv.org/abs/2507.21449).
 
 ### 4. Theorem 3.1 lacks the domain/prior hypothesis that makes its formula global, and line 158 misdescribes the fiber
 
 **Location:** lines 153--180.
 
-The four-case Aoyagi--Watanabe formula and parity are transcribed correctly from the [primary paper](https://www.sciencedirect.com/science/article/abs/pii/S0893608005000559). As written, however, “for reduced-rank regression as above” inherits no specified compact \(W\) or prior support. A global RLCT depends on which parts of the fiber the parameter domain meets. The formula is valid when the positive prior/domain contains a factorization attaining the global minimum. It need not hold on an arbitrary sufficiently small compact neighborhood of another exact factorization. The file itself supplies the counterexample at line 427: for \(M=N=H=2,r=0\), a small neighborhood of \((A,B)=(I_2,0)\) has local coefficient \(2\), whereas the table gives \(3/2\). Thus Theorem 3.1 is `correct-with-gaps`, not an unconditional theorem about any \(W\) allowed by Section 2.
+The four-case Aoyagi--Watanabe formula and parity are transcribed correctly from the [primary paper](https://www.sciencedirect.com/science/article/abs/pii/S0893608005000559). As written, however, “for reduced-rank regression as above” inherits no specified compact $W$ or prior support. A global RLCT depends on which parts of the fiber the parameter domain meets. The formula is valid when the positive prior/domain contains a factorization attaining the global minimum. It need not hold on an arbitrary sufficiently small compact neighborhood of another exact factorization. The file itself supplies the counterexample at line 427: for $M=N=H=2,r=0$, a small neighborhood of $(A,B)=(I_2,0)$ has local coefficient $2$, whereas the table gives $3/2$. Thus Theorem 3.1 is `correct-with-gaps`, not an unconditional theorem about any $W$ allowed by Section 2.
 
-Line 158 is also false as stated. The set \(\{(A,B):BA=C\}\) is a fiber of a matrix-multiplication map, not in general “a determinantal variety,” and it is not singular exactly when one factor drops rank. In the preceding \(C=0\) example, \(A=I_2\) is invertible, so locally the equation \(BA=0\) is equivalent to \(B=0\); the fiber is smooth there even though \(B\) has rank zero. Current papers explicitly study these sets as multiplication fibers with rank stratifications: [Pepin Lehalleur--Rimányi (2024)](https://arxiv.org/abs/2411.19920) and [Shewchuk--Bhattacharya (2024)](https://arxiv.org/abs/2404.14855).
+Line 158 is also false as stated. The set $\{(A,B):BA=C\}$ is a fiber of a matrix-multiplication map, not in general “a determinantal variety,” and it is not singular exactly when one factor drops rank. In the preceding $C=0$ example, $A=I_2$ is invertible, so locally the equation $BA=0$ is equivalent to $B=0$; the fiber is smooth there even though $B$ has rank zero. Current papers explicitly study these sets as multiplication fibers with rank stratifications: [Pepin Lehalleur--Rimányi (2024)](https://arxiv.org/abs/2411.19920) and [Shewchuk--Bhattacharya (2024)](https://arxiv.org/abs/2404.14855).
 
-### 5. Problem 4.10 already has finite-\(\beta\) local invariance, and its global \(\beta\to\infty\) clause is ambiguous
+### 5. Problem 4.10 already has finite-$\beta$ local invariance, and its global $\beta\to\infty$ clause is ambiguous
 
 **Location:** lines 329--335.
 
-For finite \(\beta>0\), KL between two softmax distributions is locally comparable to squared distance between their centered logits. Under the analytic coordinate change \(V=\beta\widetilde V\), a neighborhood of the scaled Fourier point maps to a neighborhood of the \(\beta=1\) Fourier point, and
-\[
+For finite $\beta>0$, KL between two softmax distributions is locally comparable to squared distance between their centered logits. Under the analytic coordinate change $V=\beta\widetilde V$, a neighborhood of the scaled Fourier point maps to a neighborhood of the $\beta=1$ Fourier point, and
+$$
 K_\beta(u,\beta\widetilde V)\asymp
 \beta^2\bigl\|P(f_{u,\widetilde V}-\delta)\bigr\|^2
 \asymp K_1(u,\widetilde V).
-\]
-Therefore the local coefficient and multiplicity at the scaled Fourier point are constant for all finite \(\beta\). Their numerical value remains open, as does the global minimum.
+$$
+Therefore the local coefficient and multiplicity at the scaled Fourier point are constant for all finite $\beta$. Their numerical value remains open, as does the global minimum.
 
-The last sentence is not fully well-posed for that global minimum. The admissible radius satisfies \(R\ge(1+\beta)R_p\), so \(R\) cannot remain fixed as \(\beta\to\infty\). Taking \(R(\beta)=(1+\beta)R_p\), \(R(\beta)=\beta^2R_p\), or an unrestricted-domain limit are inequivalent questions and can include different zero-set strata. This is a precision issue, not merely exposition.
+The last sentence is not fully well-posed for that global minimum. The admissible radius satisfies $R\ge(1+\beta)R_p$, so $R$ cannot remain fixed as $\beta\to\infty$. Taking $R(\beta)=(1+\beta)R_p$, $R(\beta)=\beta^2R_p$, or an unrestricted-domain limit are inequivalent questions and can include different zero-set strata. This is a precision issue, not merely exposition.
 
 ### 6. The 2024--2026 related-work account is incomplete but does not otherwise resolve the modular or generic-teacher items
 
@@ -104,32 +104,32 @@ For attention, the [ICLR 2025 refined-LLC study](https://openreview.net/forum?id
 
 “Neural networks are never regular” at line 81 is false literally: a one-parameter linear neuron with fixed nonzero input and Gaussian output is an identifiable regular statistical model. The intended statement about commonly overparameterized networks is defensible, but the universal claim is not.
 
-Theorems 2.1 and 2.2 omit a nontriviality hypothesis such as \(K\not\equiv0\). Their listed assumptions allow a constant model equal to the truth, in which case the free energy has no positive logarithmic coefficient and the zeta function has no largest negative pole. With that routine exclusion, the stated realizable \(\beta=1\) free-energy and expected-generalization formulas are correct.
+Theorems 2.1 and 2.2 omit a nontriviality hypothesis such as $K\not\equiv0$. Their listed assumptions allow a constant model equal to the truth, in which case the free energy has no positive logarithmic coefficient and the zeta function has no largest negative pole. With that routine exclusion, the stated realizable $\beta=1$ free-energy and expected-generalization formulas are correct.
 
 ## Proof and background-claim ledger
 
 | Result or claim | Verdict | Audit note |
 |---|---|---|
-| Theorem 2.1 (Watanabe), lines 83--89 | `correct-with-gaps` | Correct in the intended nontrivial realizable analytic setting; add \(K\not\equiv0\). |
+| Theorem 2.1 (Watanabe), lines 83--89 | `correct-with-gaps` | Correct in the intended nontrivial realizable analytic setting; add $K\not\equiv0$. |
 | Theorem 2.2 (zeta continuation), lines 101--103 | `correct-with-gaps` | Correct under the same nontriviality qualification; otherwise there is no largest pole. |
 | Resolution/volume claims, lines 105--121 | `correct` | Normal-crossing ratios, pole order, and leading sublevel-volume form agree with the standard theory. |
-| Example 2.3, lines 123--128 | `correct` | All three pairs and the general \(r/(2k)\) computation check. |
+| Example 2.3, lines 123--128 | `correct` | All three pairs and the general $r/(2k)$ computation check. |
 | Lemma 2.4, lines 132--139 | `correct` | Sum, product, equal-threshold multiplicity, and comparability rules are correct for separate variables. |
 | Definition 2.5 and lower semicontinuity, lines 145--149 | `correct` | The direction of semicontinuity and compact-minimum argument are correct. |
 | Theorem 3.1, lines 160--178 | `correct-with-gaps` | Formula correct; global claim needs domain/prior support containing a minimizing factorization. |
 | Multiplication-fiber geometry, line 158 | `flawed` | Not generally a determinantal variety; rank drop is not equivalent to a singular point. |
-| Gaussian relative-variance check, lines 208--210 | `correct` | For mean error \(d\), \(\mathbb E[f^2]=\|d\|^2+\|d\|^4/4\); boundedness gives the global condition. |
+| Gaussian relative-variance check, lines 208--210 | `correct` | For mean error $d$, $\mathbb E[f^2]=\|d\|^2+\|d\|^4/4$; boundedness gives the global condition. |
 | Lemma 4.2, lines 216--253 | `correct` | Both trigonometric identities, Fourier inversion signs, constant column, and padding check. |
-| Minimal-width lower bound, line 257 | `correct` | Subtracting the row/column additive part lowers rank by at most two, so \(H\ge p-2\). |
-| Proposition 4.6(i), lines 296--303 | `correct` | The sublevel inclusion is scaled correctly; \(P\asymp|\bar u|^4\) in codimension \(2p-1\), giving \((2p-1)/4\). |
-| Proposition 4.6(ii), lines 305--306 | `correct` | The \(3p-2\) independent orbit directions and tubular-volume upper bound on \(\lambda\) are valid. |
-| Remark 4.8, lines 317--319 | `correct` | Polarization makes the squares span all \(p^2\) input functions; generic tiny units give a submersion and \((p^3/2,1)\). |
-| Softmax realizability/analyticity, line 329 | `correct` | Scaling \(V\) realizes the smoothed truth; finite-\(\beta\) KL is analytic. |
+| Minimal-width lower bound, line 257 | `correct` | Subtracting the row/column additive part lowers rank by at most two, so $H\ge p-2$. |
+| Proposition 4.6(i), lines 296--303 | `correct` | The sublevel inclusion is scaled correctly; $P\asymp|\bar u|^4$ in codimension $2p-1$, giving $(2p-1)/4$. |
+| Proposition 4.6(ii), lines 305--306 | `correct` | The $3p-2$ independent orbit directions and tubular-volume upper bound on $\lambda$ are valid. |
+| Remark 4.8, lines 317--319 | `correct` | Polarization makes the squares span all $p^2$ input functions; generic tiny units give a submersion and $(p^3/2,1)$. |
+| Softmax realizability/analyticity, line 329 | `correct` | Scaling $V$ realizes the smoothed truth; finite-$\beta$ KL is analytic. |
 | Attention finite-variance condition, lines 357--359 | `correct` | On a compact parameter ball all categorical probabilities are uniformly positive, yielding quadratic comparability. |
 | Attention Taylor degrees, line 373 | `correct but misleading` | Scores begin in degree 3 and attention corrections in degree 5, but exact centering makes them irrelevant at uniform truth. |
-| Linear-attention degree count, lines 385--390 | `correct` | Logits have multidegree \((3,1,1)\), total degree 5; squared Gaussian loss has degree 10. |
-| Toy local coefficients, lines 411--415 | `correct` | Smooth line points have \(1/2\); at the origin \(K\asymp(w_1^2+w_2^2)^4\), giving \(1/4\). |
-| ReLU realization, lines 461--462 | `correct` | The displayed unit is exactly an input-pair indicator; \(p^2\) output-labelled units realize the table. |
+| Linear-attention degree count, lines 385--390 | `correct` | Logits have multidegree $(3,1,1)$, total degree 5; squared Gaussian loss has degree 10. |
+| Toy local coefficients, lines 411--415 | `correct` | Smooth line points have $1/2$; at the origin $K\asymp(w_1^2+w_2^2)^4$, giving $1/4$. |
+| ReLU realization, lines 461--462 | `correct` | The displayed unit is exactly an input-pair indicator; $p^2$ output-labelled units realize the table. |
 
 ## Per-item precision and openness
 
@@ -139,12 +139,12 @@ Theorems 2.1 and 2.2 omit a nontriviality hypothesis such as \(K\not\equiv0\). T
 | Problem 4.5 | `minor-issues` | `open-with-related-work` | “The multiplicity at the minimizing points” could mean the list of pointwise multiplicities or their maximum/global pole order. Cullen 2026 covers nondegenerate points, not these singular minima. |
 | Conjecture 4.7 | `well-posed` | `open-with-related-work` | No equality/counterexample for a padded dead unit was found. |
 | Conjecture 4.9 | `well-posed` | `open-with-related-work` | Fourier structure is proved for other selection principles, not for RLCT minimizers. |
-| Problem 4.10 | `minor-issues` | `open-with-related-work` | The local pair is finite-\(\beta\) invariant, but not computed; the global \(\beta\to\infty\) question lacks a choice of \(R(\beta)\). |
-| Problem 5.2 | `well-posed` | `resolved` | Exact reduction to \(\|EUP\|_F^2\) gives the closed formula above and no \(T\) or \(R\) dependence. |
+| Problem 4.10 | `minor-issues` | `open-with-related-work` | The local pair is finite-$\beta$ invariant, but not computed; the global $\beta\to\infty$ question lacks a choice of $R(\beta)$. |
+| Problem 5.2 | `well-posed` | `resolved` | Exact reduction to $\|EUP\|_F^2$ gives the closed formula above and no $T$ or $R$ dependence. |
 | Conjecture 5.3 | `well-posed` | `open-with-related-work` | Generic LCT constancy is known in algebraic settings, but no theorem found covers this real-analytic teacher-dependent KL germ and its real multiplicity. |
 | Problem 5.4 | `well-posed` | `open-with-related-work` | Current attention LLC work is empirical; no exact generic-teacher value was found. |
 | Problem 5.5 | `well-posed` | `open-with-related-work` | Tensor-decomposition RLCT bounds overlap the multilinear structure but do not compute this context-indexed polynomial. |
-| Problem 6.1 | `well-posed` | `open-with-related-work` | Part (a) is a direct WBIC corollary; the varying-\(\gamma_n\) regimes and transition remain open. |
+| Problem 6.1 | `well-posed` | `open-with-related-work` | Part (a) is a direct WBIC corollary; the varying-$\gamma_n$ regimes and transition remain open. |
 | Problem 6.2 | `minor-issues` | `open-with-related-work` | The underlying compact domain/prior is not explicit. Convergence and leading WBIC fluctuations are known; classification of factorization strata remains open. |
 | Question 9.1 | `well-posed` | `resolved` | Finite activation-cell decomposition reduces the stated model to a finite sum of analytic branch models. |
 
@@ -159,7 +159,7 @@ Searches were run on 2026-07-14. The strings below are literal queries; repeated
 - `"Composing global solutions to reasoning tasks" modular addition quadratic zero mean exact solutions`
 - `site:openreview.net modular addition quadratic network tensor rank exact representation`
 
-Evidence found: [Tian/CoGS, NeurIPS 2025](https://openreview.net/pdf?id=tD7MLq0dbZ), [He et al. 2026](https://arxiv.org/abs/2602.16849), and [McCracken et al., NeurIPS 2025](https://proceedings.neurips.cc/paper_files/paper/2025/hash/3edb234091dca2023308398dbf824850-Abstract-Conference.html); none determines \(H_{\min}(p)\) for the stated architecture.
+Evidence found: [Tian/CoGS, NeurIPS 2025](https://openreview.net/pdf?id=tD7MLq0dbZ), [He et al. 2026](https://arxiv.org/abs/2602.16849), and [McCracken et al., NeurIPS 2025](https://proceedings.neurips.cc/paper_files/paper/2025/hash/3edb234091dca2023308398dbf824850-Abstract-Conference.html); none determines $H_{\min}(p)$ for the stated architecture.
 
 ### Problem 4.5
 
@@ -195,7 +195,7 @@ Evidence found: [Morwani et al., ICLR 2024](https://openreview.net/forum?id=i9wD
 - `site:openreview.net "learning coefficient" softmax cross entropy`
 - `multinomial logistic regression real log canonical threshold singular softmax`
 
-No source computing this Fourier-point germ was found. [Kurumadani's semi-regular method](https://arxiv.org/abs/2406.02646) is related but does not cover it. Finite-\(\beta\) invariance follows directly from softmax KL's positive-definite Hessian on centered logits, as above.
+No source computing this Fourier-point germ was found. [Kurumadani's semi-regular method](https://arxiv.org/abs/2406.02646) is related but does not cover it. Finite-$\beta$ invariance follows directly from softmax KL's positive-definite Hessian on centered logits, as above.
 
 ### Problem 5.2
 
@@ -240,7 +240,7 @@ Evidence found: [Yoshida--Watanabe](https://arxiv.org/abs/2303.05731) gives tens
 - `site:arxiv.org 2024 2025 2026 local learning coefficient estimator consistency localization gamma`
 - `site:openreview.net local learning coefficient estimator localization WBIC`
 
-Evidence found: [Watanabe 2013](https://jmlr.org/papers/v14/watanabe13a.html) resolves fixed \(\gamma\); [Lau et al.](https://arxiv.org/abs/2308.12108) defines the local estimator, and [Hitchcock--Hoogland 2025](https://arxiv.org/abs/2507.21449) benchmarks sampling. No varying-\(\gamma_n\) theorem for this toy competition was found.
+Evidence found: [Watanabe 2013](https://jmlr.org/papers/v14/watanabe13a.html) resolves fixed $\gamma$; [Lau et al.](https://arxiv.org/abs/2308.12108) defines the local estimator, and [Hitchcock--Hoogland 2025](https://arxiv.org/abs/2507.21449) benchmarks sampling. No varying-$\gamma_n$ theorem for this toy competition was found.
 
 ### Problem 6.2
 

@@ -24,15 +24,15 @@ The cited proposition does **not** by itself settle the finite-image and subanal
 
 The problem fixes $X_0=(0,\pi/2)\in W_0$ before parts (a)--(c), then part (c) replaces the dynamics by
 
-\[
+$$
 dX_t=-\nabla L(X_t)\,dt+\sqrt{2\varepsilon L(X_t)}\,dB_t.
-\]
+$$
 
 Here
 
-\[
+$$
 \sqrt{L(x,y)}=|\sin x|\sin^2y.
-\]
+$$
 
 This coefficient is globally Lipschitz on the torus, and the drift is smooth. At every point of $W_0$, both coefficients vanish. Consequently the constant path $X_t\equiv X_0$ is a strong solution and pathwise uniqueness makes it the only solution. Thus the requested convergence holds trivially and the “hitting distribution” is exactly $\delta_{X_0}$, for every $\varepsilon$, not merely asymptotically. The same observation holds for every initial point in $W_0$.
 
@@ -46,25 +46,25 @@ There are two independent defects.
 
 First, the equation
 
-\[
+$$
 \frac{n_k}{\log n_k}=\frac{2\Delta\lambda_k}{s_k^2}
-\]
+$$
 
 does not define $n_k$ without a branch and an existence condition. On $n>1$, $n/\log n$ has minimum $e$ at $n=e$. If the right-hand side is below $e$, there is no real solution; if it exceeds $e$, there are two. The intended large branch should be specified, for example using the $W_{-1}$ branch of Lambert $W$, and the regime in which Watanabe's large-$n$ expansion is valid must exclude the small root. Integer sample sizes add a further harmless rounding choice, but do not fix the missing branch.
 
 Second, for a fixed target spectrum all $n_k$ are fixed finite constants. Therefore a sequence $n\to\infty$ satisfying the exclusion in part (a) is eventually beyond every crossover, $k^\ast (n)=r$, and
 
-\[
+$$
 \min_k|n-n_k|\ge c\sqrt{n\log n}
-\]
+$$
 
 eventually holds automatically. The claimed theorem then tests only ordinary eventual posterior concentration at the final rank, not the staircase near the crossovers. A meaningful asymptotic must introduce a joint family, for example $s_k=s_k(N)\to0$ so that the large crossover roots tend to infinity, and state uniformity in that family.
 
 Part (b) also leaves “uniformly” unquantified over $H$, $r$, and spectra. Since
 
-\[
+$$
 \frac{t_k}{\log(1/u_0)}\longrightarrow \frac{\tau}{2s_k},
-\]
+$$
 
 its universal-$\phi$ question is a fixed functional-equation comparison across spectra, not an asymptotic matching of the finite schedules unless a spectrum family is supplied. Related empirical work, notably [Chen et al.](https://arxiv.org/abs/2310.06301), does not repair or prove this statement. Verdict: `ill-posed`.
 
@@ -74,19 +74,19 @@ its universal-$\phi$ question is a fixed functional-equation comparison across s
 
 For fixed deep-linear data, the “consecutive crossovers” are fixed numbers. The assertion
 
-\[
+$$
 F_n(U_k^n)=n\inf_{U_k^n}L_n+\Lambda(C_k\cap W)\log n+o_p(\log n)
-\]
+$$
 
 “for all $n$ between consecutive crossovers” has no $n\to\infty$ sequence on which the $o_p(\log n)$ can be interpreted. As in Problem 3.9, a joint scaling that drives the crossover intervals to infinity is required, together with a uniform probabilistic statement. Without it, neither the existence nor the nonexistence branch is a mathematical proposition.
 
 The fixed-window saddle integral itself is correct up to multiplicative constants, but the sentence “No window size makes the naive ladder literally true at a strict saddle” has a boundary-scale counterexample in the very two-dimensional Morse model used. Taking $\delta=c\beta^{-1/2}$ and rescaling $(x,y)=\beta^{-1/2}(X,Y)$ gives
 
-\[
+$$
 \int_{B_\delta}e^{-\beta L}
 =e^{-\beta L(z)}\beta^{-1}\!
 \int_{B_c}e^{-\mu(X^2-Y^2)/2}\,dX\,dY,
-\]
+$$
 
 so its window free energy is $\beta L(z)+\log\beta+O(1)$. In dimension two the file itself assigns the saddle $\lambda=1$, so this window does reproduce the naive $\beta L+\lambda\log\beta$ term (though not the multiplicity's $-\log\log\beta$ term). The correct conclusion is that the coefficient is schedule-dependent and generally nonintrinsic, not that no schedule can ever coincide with $\lambda$. Verdict: `ill-posed`; the calculation is `correct-with-gaps` because its universal deduction fails at the boundary scale.
 
@@ -112,9 +112,9 @@ The admissible-width threshold $N_0(f)$ is undefined. More seriously, fixing an 
 
 The sentence says that if parameters are nonidentifiable or Fisher information degenerates, “then $W_0$ is a positive-dimensional analytic variety rather than a point.” A one-parameter normal model gives a counterexample:
 
-\[
+$$
 p(x\mid w)=N(w^2,1),\qquad q=N(0,1).
-\]
+$$
 
 Its KL loss is $K(w)=w^4/2$, its Fisher information is $4w^2$ and hence degenerates at the truth, and $p(\cdot\mid w)=p(\cdot\mid -w)$. Nevertheless $W_0=\lbrace 0\rbrace $ is isolated. Singular zero sets may be positive-dimensional, nonreduced, isolated, or mixtures of these; singularity alone does not force dimension.
 
@@ -132,17 +132,17 @@ The global multiplicity should also be stated as the **maximum pole order among 
 
 Theorem 2.6's formula itself agrees with the reduced-rank-regression formula in [Aoyagi--Watanabe](https://www.sciencedirect.com/science/article/abs/pii/S0893608005000559). In constant width, however,
 
-\[
+$$
 \lambda_k=\frac{(H+k)(3H-k)+p_k}{8},\qquad
 p_k=\mathbf 1_{3H+k\text{ odd}},
-\]
+$$
 
 so
 
-\[
+$$
 \Delta\lambda_k
 =\frac{2(H-k)+1+p_k-p_{k-1}}{8}.
-\]
+$$
 
 The file sometimes says “up to parity,” but then uses parity-free consequences. In particular, the claim in line 293 that $\Delta\lambda_k$ is bounded above by $(2H-1)/8$ is false: for even $H$, $\Delta\lambda_1=2H/8$. If $k=H$ is allowed, $\Delta\lambda_H=0$, so $\lambda_{H-1}=\lambda_H$; hence line 172's statement that every lower rank has a *smaller* coefficient is false at the last step. Its further claim that the Bayesian ladder passes through all ranks is overgeneral even when $r<H$: line 287 itself later gives a near-flat-spectrum example in which a rung is skipped, so line 172 needs the well-separated-spectrum hypothesis later imposed. Problem 3.7 assumes $H>r$, which avoids $k=H$ if that assumption is intended to carry into Problem 3.9, but the incorrect upper bound remains. These are errors in deductions, not in Theorem 2.6.
 

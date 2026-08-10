@@ -111,9 +111,9 @@ The nonattainment fallback at line 272 is also not mathematically adequate. If \
 
 For decoder \(\Psi\), step size \(\eta\), and zero initialization, one nonnegative ISTA step is
 \[
-z^{(1)}=\operatorname{ReLU}(\eta\Psi^\top y-\eta\lambda\mathbf1).
+z^{(1)}=\mathrm{ReLU}(\eta\Psi^\top y-\eta\lambda\mathbf1).
 \]
-Thus \(\operatorname{ReLU}(Wy+b)\) is literally that step only when \(W=\eta\Psi^\top\) and \(b=-\eta\lambda\mathbf1\). The file learns arbitrary \(W,b\) jointly and imposes neither relation. It is more accurate to call the encoder a one-layer learned-thresholding/LISTA-style amortizer. Daubechies--Defrise--De Mol establishes iterative thresholding, but does not justify identifying arbitrary encoder weights and biases with a decoder-tied ISTA step.
+Thus \(\mathrm{ReLU}(Wy+b)\) is literally that step only when \(W=\eta\Psi^\top\) and \(b=-\eta\lambda\mathbf1\). The file learns arbitrary \(W,b\) jointly and imposes neither relation. It is more accurate to call the encoder a one-layer learned-thresholding/LISTA-style amortizer. Daubechies--Defrise--De Mol establishes iterative thresholding, but does not justify identifying arbitrary encoder weights and biases with a decoder-tied ISTA step.
 
 The phrase “an SAE is the same objective” also suppresses the learned decoder/output bias used in standard vanilla SAE formulations. A centered idealization is defensible, but it must be labeled as such rather than attributed literally to all practical SAEs.
 
@@ -138,9 +138,9 @@ It also overlaps the hierarchical synthetic experiments in [Matryoshka SAEs](htt
 **Locations:** lines 55, 70, 126, 242, 284--295, 319--327, and 341--425.
 
 - Line 55 calls ReLU “the standard” nonlinearity, although modern transformers commonly use GELU/SiLU. This is harmless for the formal model but inaccurate motivation.
-- “Every 2k columns are linearly independent” is vacuous when fewer than \(2k\) columns exist; the standard formulation is \(\operatorname{spark}(\Phi)>2k\), or independence of every subset of at most \(2k\) columns.
+- “Every 2k columns are linearly independent” is vacuous when fewer than \(2k\) columns exist; the standard formulation is \(\mathrm{spark}(\Phi)>2k\), or independence of every subset of at most \(2k\) columns.
 - For \(F_0\), “some minimizing code” is undefined on samples outside the cone (where the infimum is \(+\infty\)); liveness should be restricted to dictionaries/samples with a finite constrained cost.
-- Line 295's “piecewise-polynomial integral” is false in parameters. Already \(\int_0^1\operatorname{ReLU}(wx+b)^2dx\) contains a \(b^3/w\) term when the threshold lies inside \([0,1]\); the loss is piecewise rational/semialgebraic, not generally polynomial.
+- Line 295's “piecewise-polynomial integral” is false in parameters. Already \(\int_0^1\mathrm{ReLU}(wx+b)^2dx\) contains a \(b^3/w\) term when the threshold lies inside \([0,1]\); the loss is piecewise rational/semialgebraic, not generally polynomial.
 - The classical packing, Welch, RIP, dictionary-learning, and frame-potential claims are broadly correct. Johnson--Lindenstrauss is an indirect citation for the spherical packing proposition rather than a direct statement of it, and the Gaussian RIP sentence in Theorem 2.5 is a separate standard result rather than something established by the two sharp-constant citations alone.
 - `latexmk` completed successfully. Remaining warnings are overfull boxes (notably lines 47--48 and 105--109) and underfull bibliography/vbox warnings, not correctness failures.
 

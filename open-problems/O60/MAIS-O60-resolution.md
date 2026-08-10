@@ -8,15 +8,17 @@
 
 **The strengthening (Sol).** The failure is not an artifact of the dead-neuron loophole or of the freedom to choose Clarke trajectories. There is an open set of active initializations on which the Clarke trajectory is *unique* (via local semiconvexity of the loss at positive-slope kinks), stays active forever, captures the cross-gates onto sliding kink faces one by one, memorizes a single table entry with $\lVert\theta\rVert\to\infty$ — and its normalized limit has the same flat $\tfrac{2}{p-1}$ spectrum. Companion theorems give an open set where *every* Clarke trajectory dies in finite time, and carry the failure to $C^\infty$ dead-zone smoothings of the ReLU and to fixed-step full-batch gradient descent. The result does not extend to everywhere-positive activations such as softplus, where both mechanisms are unavailable.
 
-**Full details** can be found in the attachments to [issue #1](https://github.com/lionellevine/MAIS/issues/1). The proofs were independently verified by Claude Fable 5, and the constructions reproduce numerically.
+**Full details** are published as [MAIS-P3](../../papers/P3/), available on [arXiv:2608.04451](https://arxiv.org/abs/2608.04451). The proofs were independently verified by Claude Fable 5, and the constructions reproduce numerically.
 
 **Successor problem** [MAIS-O92: The outcome law of one rectifier neuron](../MAIS-O92.md) asks whether alignment is *typical*, and with what probability each outcome occurs from a Gaussian initialization.
 
 ## Documents
 
-The solution documents are attached to [issue #1](https://github.com/lionellevine/MAIS/issues/1), where the discussion lives:
+The published solution is Gautam Neelakantan Memana, *A Counterexample to Fourier Alignment in Single-Neuron Modular Addition*, [MAIS-P3](../../papers/P3/), August 2026 — [arXiv:2608.04451](https://arxiv.org/abs/2608.04451).
+
+The component manuscripts remain attached to [issue #1](https://github.com/lionellevine/MAIS/issues/1), where the discussion lives:
 
 - Gautam Neelakantan Memana, *A simple dead-neuron counterexample of MAIS-60*, August 1, 2026 — [PDF](https://github.com/user-attachments/files/30615776/MAIS_60-2.pdf).
 - GPT-5.6 Sol, *Strengthened counterexamples to single-frequency alignment in MAIS-O60*, written in conversation with G. N. Memana, August 1, 2026 — [PDF](https://github.com/user-attachments/files/30615797/MAIS_O60_strengthened_counterexamples.pdf).
 
-*Related: [MAIS-O60](../MAIS-O60.md) (the problem page) · [MAIS-O92](../MAIS-O92.md) (the successor: the outcome law this resolution leaves open).*
+*Related: [MAIS-O60](../MAIS-O60.md) (the problem page) · [MAIS-P3](../../papers/P3/) (the published solution) · [MAIS-O92](../MAIS-O92.md) (the successor: the outcome law this resolution leaves open).*

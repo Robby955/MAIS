@@ -12,12 +12,12 @@ The arena is the ReLU toy model of Elhage et al. [[EHOS+22]](../references/EHOS+
 
 **Problem ([MAIS-A4, Problem 5.4](../agendas/A4/MAIS-A4.tex#L374)).** Let $R$ be the interference above.
 
-1. Exhibit a quadruple $(m,n,S,\lambda)$, where $m>n\ge2$, $S\in(0,1)$, and $\lambda>0$, for which the two sets of minimizers below are nonempty, every $(W,b)\in\operatorname{argmin}(L+\lambda R)$ has task loss below the orthogonality price, i.e. $L(W,b)<(m-n)\ v(S)$, and
+1. Exhibit a quadruple $(m,n,S,\lambda)$, where $m>n\ge2$, $S\in(0,1)$, and $\lambda>0$, for which the two sets of minimizers below are nonempty, every $(W,b)\in\mathrm{argmin}(L+\lambda R)$ has task loss below the orthogonality price, i.e. $L(W,b)<(m-n)\ v(S)$, and
 
-$$\sup\bigl\lbrace \mu(W) : (W,b)\in\operatorname{argmin}(L+\lambda R)\bigr\rbrace  \ <\  \inf\bigl\lbrace \mu(W) : (W,b)\in\operatorname{argmin} L\bigr\rbrace ,$$
+$$\sup\bigl\lbrace \mu(W) : (W,b)\in\mathrm{argmin}(L+\lambda R)\bigr\rbrace  \ <\  \inf\bigl\lbrace \mu(W) : (W,b)\in\mathrm{argmin} L\bigr\rbrace ,$$
 
    or prove that no such quadruple exists.
-2. For $(m,n)=(5,2)$ and one explicit $S$ (say $S=0.999$), determine the map $\lambda \mapsto \lbrace \mu(W) : (W,b)\in\operatorname{argmin}(L+\lambda R)\rbrace $ on $\lambda\in(0,\infty)$.
+2. For $(m,n)=(5,2)$ and one explicit $S$ (say $S=0.999$), determine the map $\lambda \mapsto \lbrace \mu(W) : (W,b)\in\mathrm{argmin}(L+\lambda R)\rbrace $ on $\lambda\in(0,\infty)$.
 
 In words: is there any regime where penalizing the average strictly lowers the worst case for *every* minimizer, while still storing features usefully? The task-loss clause excludes the cheap large-$\lambda$ answer of lowering coherence by shrinking columns to zero, and the strict inequality is between the worst regularized minimizer and the best unregularized one. Scalarization — the two-line fact of the opening paragraph — cannot answer it: it controls the average $R$, not the max $\mu$. At $(5,2)$ and high sparsity the unregularized optimum is observed by Elhage et al. [[EHOS+22]](../references/EHOS+22.md) (empirically, not proved) to be the regular pentagon, with $\mu=\cos 36^\circ\approx0.809$; the question is whether the minimizer passes through low-$\mu$ geometries as $\lambda$ grows or jumps straight to feature-dropping. See [MAIS-A4](../agendas/A4/) for the scalarization proposition, the frame-potential warning, and the surrounding agenda.
 

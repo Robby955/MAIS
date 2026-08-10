@@ -31,4 +31,4 @@ Which representation a network adopts can depend on random initialization. [MAIS
 ## Cited by
 
 - [MAIS-A5](../agendas/A5/) — the nearest rigorous training dynamics to the agenda's selection-law problems; its small-initialization hypotheses delimit what the agenda's problems must go beyond.
-- Problems [MAIS-O59](../open-problems/MAIS-O59.md) · [MAIS-O60](../open-problems/MAIS-O60.md)
+- Problems [MAIS-O59](../open-problems/MAIS-O59.md) · [MAIS-O60](../open-problems/MAIS-O60.md) · [MAIS-O92](../open-problems/MAIS-O92.md)

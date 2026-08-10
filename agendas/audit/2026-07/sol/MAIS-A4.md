@@ -77,7 +77,7 @@ These sources change several openness verdicts to `open-with-related-work`, and 
 
 **Location:** lines 258 and 412.
 
-The file says Definition 4.7 is “the setting of Jermyn, Schiefer, and Hubinger” and that “this architecture has both monosemantic and polysemantic local minima.” The source does not study the displayed objective \(g_\theta(x)=\operatorname{ReLU}(V\operatorname{ReLU}(Wx+\beta)+c)\) on \(x\sim\mathcal D_{m,S}\). Jermyn et al., [*Engineering Monosemanticity in Toy Models*](https://arxiv.org/abs/2211.09169), first randomly project sparse feature vectors \(f\) to inputs \(Pf\), then use
+The file says Definition 4.7 is “the setting of Jermyn, Schiefer, and Hubinger” and that “this architecture has both monosemantic and polysemantic local minima.” The source does not study the displayed objective \(g_\theta(x)=\mathrm{ReLU}(V\mathrm{ReLU}(Wx+\beta)+c)\) on \(x\sim\mathcal D_{m,S}\). Jermyn et al., [*Engineering Monosemanticity in Toy Models*](https://arxiv.org/abs/2211.09169), first randomly project sparse feature vectors \(f\) to inputs \(Pf\), then use
 
 \[
 h=N(L_1Pf+b),\qquad y=L_2h,
@@ -114,11 +114,11 @@ This is \(O(n)\) only if there is a **uniform relative gap**, for example \(c^2\
 
 **Location:** line 360, read with the attainment caveat at lines 147–149.
 
-The statement that minimizers approach \(\operatorname{argmin}L\) as \(\lambda\downarrow0\) and the orthogonal phase as \(\lambda\to\infty\) does not follow from “standard epi-convergence” on the noncompact \((W,b)\)-space without equicoercivity, attainment, and a precise topology. As \(\lambda\to\infty\), epi-convergence would first constrain to minimizers of \(R\), but \(R=0\) means pairwise orthogonal **nonzero** columns plus arbitrarily many zero columns; it does not by itself prove convergence of minimizers or exclude escaping norms/biases. As \(\lambda\downarrow0\), cluster points require precompactness and need not exist. The formal Problem 5.4 wisely requires nonempty minimizer sets in part (1), but this explanatory “routine regimes” claim should not be presented as established.
+The statement that minimizers approach \(\mathrm{argmin}L\) as \(\lambda\downarrow0\) and the orthogonal phase as \(\lambda\to\infty\) does not follow from “standard epi-convergence” on the noncompact \((W,b)\)-space without equicoercivity, attainment, and a precise topology. As \(\lambda\to\infty\), epi-convergence would first constrain to minimizers of \(R\), but \(R=0\) means pairwise orthogonal **nonzero** columns plus arbitrarily many zero columns; it does not by itself prove convergence of minimizers or exclude escaping norms/biases. As \(\lambda\downarrow0\), cluster points require precompactness and need not exist. The formal Problem 5.4 wisely requires nonempty minimizer sets in part (1), but this explanatory “routine regimes” claim should not be presented as established.
 
 ### 8. Smaller precision defects in Problems 5.5, 5.8, and 5.9
 
-**Problem 5.5, lines 366–374 — `minor-issues`.** Part (2) does not require \(\operatorname{argmin}(L+\lambda R)\ne\varnothing\). Therefore “every” regularized minimizer recovers \(W_\lambda\) is formally true when that argmin is empty, creating an unintended vacuous witness. Remark 3.2 acknowledges attainment but its alternative reading in terms of “\(\delta\)-minimizers uniformly in small \(\delta\)” is not actually quantified. Require both argmins nonempty or state the uniform approximate-minimizer version.
+**Problem 5.5, lines 366–374 — `minor-issues`.** Part (2) does not require \(\mathrm{argmin}(L+\lambda R)\ne\varnothing\). Therefore “every” regularized minimizer recovers \(W_\lambda\) is formally true when that argmin is empty, creating an unintended vacuous witness. Remark 3.2 acknowledges attainment but its alternative reading in terms of “\(\delta\)-minimizers uniformly in small \(\delta\)” is not actually quantified. Require both argmins nonempty or state the uniform approximate-minimizer version.
 
 **Problem 5.8, lines 404–414 — `minor-issues`.** The set defining \(\delta^*\) can be empty, but no convention says whether \(\inf\varnothing=+\infty\) or whether \(\delta^*\) is intended to lie in \([0,1]\). The Jermyn attribution in part (2) is also to a different objective, as above; the requested existence statement itself is otherwise precise.
 

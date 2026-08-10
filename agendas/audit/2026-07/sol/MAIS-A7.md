@@ -14,7 +14,7 @@ The locations below refer to the line numbers in the supplied source. Literature
 
 **Location:** Question 3.1(b), lines 180--190; bibliography lines 549--552.
 
-The question asks whether $w\mapsto\lambda(w)$ is lower semicontinuous on the zero set of a real-analytic function, and line 190 says no reference was found. [Lehalleur and Rimányi, *Geometry of fibers of the multiplication map of deep linear neural networks*](https://arxiv.org/abs/2411.19920), Proposition 8.4(ii), states for a real-analytic manifold $X$ and real-analytic $F:X\to\mathbb R$: “The function $x\mapsto \operatorname{rlct}_{X,x}(F)$ is lower semi-continuous.” On $W_0$, the file's $\lambda(w)$ is exactly that local RLCT. This directly resolves part (b), not merely a special matrix-factorization case. The same paper is already cited in Problem 3.7, so this is both an openness and attribution/related-work miss.
+The question asks whether $w\mapsto\lambda(w)$ is lower semicontinuous on the zero set of a real-analytic function, and line 190 says no reference was found. [Lehalleur and Rimányi, *Geometry of fibers of the multiplication map of deep linear neural networks*](https://arxiv.org/abs/2411.19920), Proposition 8.4(ii), states for a real-analytic manifold $X$ and real-analytic $F:X\to\mathbb R$: “The function $x\mapsto \mathrm{rlct}_{X,x}(F)$ is lower semi-continuous.” On $W_0$, the file's $\lambda(w)$ is exactly that local RLCT. This directly resolves part (b), not merely a special matrix-factorization case. The same paper is already cited in Problem 3.7, so this is both an openness and attribution/related-work miss.
 
 The cited proposition does **not** by itself settle the finite-image and subanalytic/frontier assertions in (a) and (c), nor the unspecified multiplicity refinement. I therefore classify the multi-part Question 3.1 as `possibly-resolved`, rather than `resolved`.
 
@@ -269,7 +269,7 @@ Outcome: [Li--Wang--Arora](https://arxiv.org/abs/2110.06914) and [Shalova--Schli
 - `Aoyagi Watanabe local learning coefficient matrix factorization saddle rank`
 - `2024 2025 2026 local learning coefficient matrix multiplication fiber local ranks A B Furman Lau`
 
-Outcome: [Lehalleur--Rimányi](https://arxiv.org/abs/2411.19920) computes fiber geometry and important global/zero-target RLCT information; [Furman--Lau](https://arxiv.org/abs/2402.03698) supplies local values used to validate estimation. Neither source gives the entire pointwise $(\operatorname{rank}A,\operatorname{rank}B)$ table plus all two-sided saddle invariants requested here.
+Outcome: [Lehalleur--Rimányi](https://arxiv.org/abs/2411.19920) computes fiber geometry and important global/zero-target RLCT information; [Furman--Lau](https://arxiv.org/abs/2402.03698) supplies local values used to validate estimation. Neither source gives the entire pointwise $(\mathrm{rank}A,\mathrm{rank}B)$ table plus all two-sided saddle invariants requested here.
 
 ### Conjecture 3.8
 

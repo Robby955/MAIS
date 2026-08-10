@@ -14,7 +14,7 @@ A dataset $(x_i,y_i)_{i\le N}$ with $y_i\in\{\pm1\}$ is **linearly separable** i
 
 ## Main results
 
-1. **Max-margin selection.** The norm $\|w_k\|$ diverges while the direction $w_k/\|w_k\|$ converges to $\hat w/\|\hat w\|$, where $\hat w = \operatorname{argmin}\{\|w\|^2 : y_i\,w\cdot x_i\ge1 \text{ for all } i\}$ is the hard-margin SVM solution. This holds for any initialization and extends beyond the logistic loss to smooth monotone losses with a tight exponential tail.
+1. **Max-margin selection.** The norm $\|w_k\|$ diverges while the direction $w_k/\|w_k\|$ converges to $\hat w/\|\hat w\|$, where $\hat w = \mathrm{argmin}\{\|w\|^2 : y_i\,w\cdot x_i\ge1 \text{ for all } i\}$ is the hard-margin SVM solution. This holds for any initialization and extends beyond the logistic loss to smooth monotone losses with a tight exponential tail.
 2. **Refined asymptotics.** The iterates grow as $w_k = \hat w\,\log k + \rho_k$ with the residual $\rho_k$ bounded, so the direction converges only at rate $O(1/\log k)$ — dramatically slower than the loss, which decays as $O(1/k)$.
 3. **Why late training helps.** The slow directional convergence means the margin is still improving long after the training error hits zero, giving a precise account of the practice of continuing to optimize the logistic or cross-entropy loss past interpolation, even as validation *loss* may rise.
 

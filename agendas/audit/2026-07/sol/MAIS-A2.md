@@ -62,7 +62,7 @@ Policies can agree on every queried first action and differ after the first tran
 The requested “blow-up” of the constant as `beta -> infinity` is backwards. For the elementary local model
 
 \[
-P(Y=1\mid q)=\operatorname{logit}^{-1}\!\bigl(\beta a(q-q_*)\bigr),
+P(Y=1\mid q)=\mathrm{logit}^{-1}\!\bigl(\beta a(q-q_*)\bigr),
 \]
 
 the Fisher information at the switch is `beta^2 a^2/4`, so local threshold error scales as `1/(beta sqrt(N))`, improving rather than deteriorating with `beta`. In the limit `beta=infinity`, the channel becomes the noiseless sign oracle used for bisection, which can achieve exponentially small one-dimensional localisation error in the number of adaptive queries. Only `beta -> 0` necessarily destroys information. There may be a non-uniform crossover between a smooth parametric regime and a noiseless-search regime, but it cannot be represented by a universally exploding `c(sk,lambda,beta)` at large `beta`. This is also consistent with the logit identification literature beginning with [Magnac--Thesmar](https://onlinelibrary.wiley.com/doi/10.1111/1468-0262.00306); recent reward/model-identifiability work likewise treats rationality parameters as observation-model parameters rather than regret floors, e.g. [Skalse--Abate, AAAI 2025](https://ojs.aaai.org/index.php/AAAI/article/view/34977).

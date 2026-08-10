@@ -1,8 +1,11 @@
 # Computational artifacts for MAIS-O62
 
-Machine-readable parameters for the numerical fits quoted in *How Many Units
-Does It Take to Add?*, plus a standalone verifier. Nothing here imports the
-search code; `verify.py` and `refine.py` depend only on `requirements.txt`.
+[Progress report](../MAIS-O62-progress-1.md) · [PDF](https://github.com/user-attachments/files/30774709/MAIS_O62_Bound_Version_2.pdf) · [MAIS-O62](../../MAIS-O62.md) · [Issue #2](https://github.com/lionellevine/MAIS/issues/2)
+
+Machine-readable parameters for the numerical fits quoted in *A Width Bound for
+Quadratic Network Modular Addition*, plus a standalone verifier. Nothing here
+imports the search code; `verify.py` and `refine.py` depend only on
+`requirements.txt`.
 
 The complete research archive, including the search implementation, calibration
 runs, and logs referenced by `protocol.md`, is attached to

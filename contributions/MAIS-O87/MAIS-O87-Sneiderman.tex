@@ -1,0 +1,392 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={A negative solution to MAIS-O87},pdfauthor={Robert Sneiderman}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\kap}{\kappa}
+\newcommand{\R}{\mathbb R}
+\newcommand{\grad}{\nabla}
+\title{A negative solution to MAIS-O87}
+\author{Robert Sneiderman\\Independent\\\texttt{robbysneiderman@gmail.com}}
+\date{September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+In the coin-line model of MAIS-O87, the training coin sits at the right
+endpoint in most episodes, and the question is whether the learned preference
+for moving right can survive at a test state whose coin lies to the left.
+It cannot. For every fixed positive training diversity and every finite
+initialization, linear policy-gradient flow eventually assigns probability
+less than one half to moving right at the test state. The misgeneralization
+probability therefore tends to zero, which answers O87 in the negative. The
+correction time may depend on the diversity and on the initial parameters;
+no rate is claimed.
+\end{abstract}
+
+\section{The question and the result}
+The agent moves on the sites $0,\ldots,L$ and receives reward for reaching
+a coin. During training, the coin is usually at $L$, but with probability
+$\eps$ it is placed uniformly on $1,\ldots,L$. A linear logistic policy
+chooses its direction from the agent's position and the coin's position.
+At the test state, the agent starts at $\lceil L/2\rceil$ and the coin is
+at zero, so moving left is the correct action.
+
+MAIS-O87~\cite{mais-o87} asks whether, after arbitrarily long training, a positive
+fraction of Gaussian initializations can still favor moving right at this
+test state, uniformly over small positive $\eps$. The following theorem
+rules this out. The coordinates $(a,b,d)$ and the gradient flow are specified
+in the next section; $q^{\mathrm{RL}}_\eps(t;\sigma,L)$ denotes the probability
+that the test-state logit is positive at time $t$ when
+$w(0)\sim N(0,\sigma^2 I_3)$.
+
+\begin{theorem}\label{thm:main}
+Fix an integer $L\ge4$ and a real $\eps\in(0,1]$. In the MAIS-A8
+coin-line model, every finite initialization of linear policy-gradient flow
+satisfies
+\[
+ a(t)+\lceil L/2\rceil b(t)<0\qquad\text{for all sufficiently large }t.
+\]
+Consequently, for every $\sigma>0$,
+\[
+ \lim_{t\to\infty}q^{\mathrm{RL}}_\eps(t;\sigma,L)=0.
+\]
+Thus the positive uniform lower bound asked for in O87 does not exist.
+\end{theorem}
+The conclusion is pointwise in $\eps$. Each fixed positive value gives
+eventual correction, with no bound on the correction time. That is enough
+for O87, which takes the long-time limit with $\eps$ held fixed.
+
+\paragraph{Idea of the proof.}
+The parameter difference $A=d-b$ increases without bound, while every
+individual logit derivative tends to zero. At a state next to a coin, this
+forces the logit to tend to either $+\infty$ or $-\infty$. The main step is
+to rule out the possibility that all these adjacent states eventually favor
+moving right.
+
+The reason is an asymmetry between the two sides of a coin. When the
+logits below the coin are positive, an episode that starts below and fails
+must make at least $\lceil(L+1)/2\rceil$ left moves, each unlikely, so the
+gradient from that side decays like a high power of a small probability.
+Just above the coin, the adjacent state can refuse the coin by never stepping
+left, and the derivative there carries a single small factor, the probability
+of stepping left; every other factor is bounded below independently of the
+rest of the policy. The corrective gradient from above therefore decays more
+slowly than the gradient from below, and any positive training weight on
+coins left of $L$ is enough to break the all-right pattern. Monotone bounds
+on the parameters then show that a nonnegative test-state logit at
+arbitrarily late times would force exactly that pattern. The proof does not
+need the training return to converge to one.
+
+\section{The model and its gradient}
+Write $w=(a,b,d)$ and $H=2L$. At position $p$ with coin at $c$, the
+logit and the probability of moving right are
+\[
+ z_{pc}=a+bp+dc,\qquad r_{pc}=\frac1{1+e^{-z_{pc}}}.
+\]
+The position is $p\in\{0,\ldots,L\}$; the training coin is
+$c\in\{1,\ldots,L\}$, with probability
+\[
+ \mu_c=\frac{\eps}{L}+(1-\eps)\mathbf1_{\{c=L\}}>0.
+\]
+Conditional on $c$, the initial position is uniform on $\{0,\ldots,L\}$.
+An episode stops successfully on hitting $c$, including at time zero, and
+otherwise stops unsuccessfully after $H$ steps. Left and right steps are
+clipped to $[0,L]$. The time-zero success and $H$-action conventions are
+those of MAIS-A8, Definition 3.1~\cite{mais-a8}.
+The objective $J$ is success probability, and
+$\dot w=\grad J$ is Euclidean gradient ascent in these three coordinates.
+
+Let $J_c$ be conditional success probability. Temporarily regard all
+nonterminal logits for fixed $c$ as independent variables, and define
+\[
+ y_{pc}=\operatorname{sign}(c-p),\qquad
+ \kap_{pc}=\left|\frac{\partial J_c}{\partial z_{pc}}\right|.
+\]
+Increasing a logit helps below the coin and hurts above it. More precisely,
+\begin{align}
+ \frac{\partial J_c}{\partial z_{pc}}&=y_{pc}\kap_{pc},
+       &\kap_{pc}&>0,\label{eq:sign}\\
+ \grad J&=\sum_{c=1}^L\sum_{p\ne c}
+       \mu_c\kap_{pc}y_{pc}(1,p,c).\label{eq:gradient}
+\end{align}
+To prove \eqref{eq:sign}, let $V_h(p,c)$ denote probability of hitting $c$
+within $h$ steps, and let $\rho_t(p,c)$ be the probability, conditional on $c$,
+of occupying $p$ at time $t$ without having stopped. For fixed $c$, the Bellman recursion is
+\[
+ V_h(s,c)=(1-r_{sc})V_{h-1}(s^-,c)+r_{sc}V_{h-1}(s^+,c)
+ \quad(s\ne c),
+\]
+with $V_0(s,c)=\mathbf1_{\{s=c\}}$ and $V_h(c,c)=1$.
+Fix a nonterminal $p$ and put $D_h(s)=\partial V_h(s,c)/\partial z_{pc}$.
+Differentiating one step yields
+\begin{align*}
+ D_h(s)={}&(1-r_{sc})D_{h-1}(s^-)+r_{sc}D_{h-1}(s^+)\\
+ &+\mathbf1_{\{s=p\}}r_{pc}(1-r_{pc})
+   [V_{h-1}(p^+,c)-V_{h-1}(p^-,c)].
+\end{align*}
+Here $D_0=0$ and $D_h(c)=0$. Iterating this identity and averaging the initial
+state gives the occupancy weights $\rho_t$ and hence
+\begin{equation}\label{eq:occupancy}
+ \frac{\partial J_c}{\partial z_{pc}}
+ =r_{pc}(1-r_{pc})\sum_{t=0}^{H-1}\rho_t(p,c)
+ \bigl[V_{H-t-1}(p^+,c)-V_{H-t-1}(p^-,c)\bigr],
+\end{equation}
+where $p^+=\min(p+1,L)$ and $p^-=\max(p-1,0)$.
+
+Below the coin, a path from $p^-$ must hit $p^+$ before reaching $c$.
+The strong Markov property and monotonicity in the remaining horizon give
+$V_h(p^-,c)\le V_h(p^+,c)$. Reflection gives the opposite inequality above
+the coin. At $h=H-1$ the inequality is strict: the closer neighbor has positive
+success probability, whereas from the farther neighbor there is positive
+probability of avoiding the closer one for all $h$ steps. This uses self-loops
+at a wall or back-and-forth steps away from the closer neighbor. Since
+$\rho_0(p,c)=1/(L+1)$, equation \eqref{eq:occupancy} has the strict claimed
+sign. Equation \eqref{eq:gradient} is the chain rule.
+
+\section{Three monotone parameter combinations}
+The following combinations control how the parameters can diverge:
+\[
+ A=d-b,\qquad R=A-a,\qquad S=A+a.
+\]
+The flow is globally defined. Indeed, $J$ is a finite polynomial in finitely
+many logistic probabilities of linear forms. Its gradient and Hessian are
+globally bounded, so the gradient field is globally Lipschitz and bounded.
+Equation \eqref{eq:gradient} gives
+\begin{equation}\label{eq:escape}
+ A'=\sum_{c,p\ne c}\mu_c\kap_{pc}|c-p|>0,
+ \qquad \|w'\|\le\sqrt{1+2L^2}\,A'.
+\end{equation}
+If $A$ had a finite upper bound, \eqref{eq:escape} would imply finite total
+arclength and convergence of $w$ to a finite point. At that point $A'$ is
+strictly positive, a contradiction. Therefore
+\begin{equation}\label{eq:Ainfty} A(t)\longrightarrow+\infty.\end{equation}
+Also $J'=\|\grad J\|^2$ and $J\le1$. Thus the squared gradient has finite
+integral. It is uniformly continuous, since the gradient and Hessian are
+bounded. A nonnegative, uniformly continuous, integrable function tends to
+zero; hence $\grad J\to0$. Equation \eqref{eq:escape} implies $A'\to0$ and,
+because every $\mu_c$ is positive,
+\begin{equation}\label{eq:kzero} \kap_{pc}(t)\longrightarrow0\quad(p\ne c).\end{equation}
+Finally,
+\begin{align}
+ R'&=\sum_{c,p\ne c}\mu_c\kap_{pc}(|c-p|-y_{pc})\ge0,\label{eq:R}\\
+ S'&=\sum_{c,p\ne c}\mu_c\kap_{pc}(|c-p|+y_{pc})\ge0.\label{eq:S}
+\end{align}
+Only the lower bounds $R\ge R(0)$ and $S\ge S(0)$, not divergence of $R$ or
+$S$, are needed below.
+
+\section{The logits next to a coin}
+The two states next to each training coin carry the argument. Write
+\[
+ \ell_c=z_{c-1,c}\quad(1\le c\le L),\qquad
+ q_c=z_{c+1,c}\quad(1\le c<L).
+\]
+\begin{lemma}\label{lem:signs}
+Each adjacent logit tends either to $+\infty$ or to $-\infty$.
+\end{lemma}
+\begin{proof}
+At a left-adjacent state, retain $t=0$ in \eqref{eq:occupancy}. Right
+immediately succeeds. After choosing left, success requires a later right
+action at $c-1$. Choosing left at every subsequent visit to $c-1$ for $H-1$
+steps prevents success, with probability at least $(1-r)^{H-1}$. Therefore
+\begin{equation}\label{eq:leftbound}
+ \kap_{c-1,c}\ge\frac{r(1-r)^H}{L+1}.
+\end{equation}
+Similarly, at a right-adjacent state,
+\begin{equation}\label{eq:rightbound}
+ \kap_{c+1,c}\ge\frac{r^H(1-r)}{L+1}.
+\end{equation}
+These estimates are independent of all other policy probabilities. Precisely,
+modify the policy at the adjacent state to choose deterministically away from
+the coin. Under the modified policy, hitting the coin from the away neighbor
+is impossible. The original probability of these paths is the expectation of
+$r^N$, or $(1-r)^N$, with $N\le H-1$. This also includes clipped wall actions.
+
+On a compact interval of logits the right sides of
+\eqref{eq:leftbound}--\eqref{eq:rightbound} have positive lower bounds.
+Thus \eqref{eq:kzero} makes the absolute value of each adjacent logit tend to
+infinity. Continuity then gives a fixed eventual sign.
+\end{proof}
+
+\section{The adjacent logits cannot all tend to positive infinity}
+\begin{lemma}\label{lem:exclude}
+No trajectory has $\ell_c\to+\infty$ for every $c$ and $q_c\to+\infty$
+for every $c<L$.
+\end{lemma}
+The lemma places no condition on logits farther from the coin, so the
+estimates below must hold whatever the policy does at those states.
+
+\subsection{Gradient estimates}
+Write $\grad J_c=P_c-N_c$, where $P_c$ is the contribution from $p<c$ and
+$N_c$ is the magnitude of the contribution from $p>c$. Both are componentwise
+nonnegative by \eqref{eq:sign}; $N_L=0$.
+Let $F_c(p_0)=1-V_H(p_0,c)$. A path starting below the coin stops before
+visiting any state above it, so
+\[
+ P_c=\frac1{L+1}\sum_{p_0<c}\grad V_H(p_0,c)
+    =-\frac1{L+1}\sum_{p_0<c}\grad F_c(p_0).
+\]
+For the finite set $\mathcal F_c(p_0)$ of failed length-$H$ action paths,
+\[
+ \grad F_c(p_0)=\sum_{\omega\in\mathcal F_c(p_0)}
+ \Pr_w(\omega\mid p_0,c)\grad\log\Pr_w(\omega\mid p_0,c).
+\]
+Put $n=\lceil(L+1)/2\rceil\ge3$. Constants $C,K>0$ depending only on $L$
+satisfy the following estimates for every coordinate $j$.
+If $m_c=\min_{p<c}z_{pc}\ge0$, then
+\begin{equation}\label{eq:Pbound} (P_c)_j\le C e^{-nm_c}.\end{equation}
+For $c=1$ and $h=z_{01}\ge0$,
+\begin{equation}\label{eq:Pone}
+ (P_1)_a=(P_1)_d\le Ce^{-Hh},\qquad (P_1)_b=0.
+\end{equation}
+If $q_c\ge0$ and $c<L$, then, without restrictions on other logits,
+\begin{equation}\label{eq:Nbound} (N_c)_j\ge K e^{-q_c}.\end{equation}
+One may take $C=HL2^H$ and $K=2^{-(H+1)}/(L+1)$.
+
+For \eqref{eq:Pbound}, a failed path starting below $c$ stays below $c$.
+If it makes $N_-$ left moves, its final position is at least $p_0+H-2N_-$;
+clipping at zero only increases this lower bound. Consequently
+$N_-\ge(H+p_0-c+1)/2$, and hence $N_-\ge n$. Each left probability is at
+most $e^{-m_c}$, so $\Pr_w(\omega\mid p_0,c)\le e^{-nm_c}$ when $m_c\ge0$.
+Each of the $H$ factors of $\log\Pr_w(\omega\mid p_0,c)$ has partial
+derivatives bounded by $L$ in absolute value, so the score is at most $HL$
+in every coordinate. There are at most $2^H$ action paths and at most $L$
+starting positions, each of weight $1/(L+1)$, and \eqref{eq:Pbound} follows
+with $C=HL2^H$.
+For $c=1$, failure from
+below requires $H$ left self-loops at $p=0$, proving \eqref{eq:Pone}.
+For \eqref{eq:Nbound}, use \eqref{eq:rightbound}, $r\ge1/2$, and
+$r(1-r)\ge e^{-q_c}/4$. All components of $(1,c+1,c)$ are at least one.
+
+\subsection{Proof of the exclusion lemma}
+\begin{proof}[Proof of Lemma \ref{lem:exclude}]
+Suppose all adjacent logits tend to $+\infty$. At sufficiently late times
+$A>0$ and $h=\ell_1>0$. Whenever $b\ge0$, we have $d=A+b>0$ and
+\[
+ m_c=h+(c-1)d,\qquad q_1=h+2b.
+\]
+Only $c\ge2$ contribute positively to $b'$. With $\mu_1=\eps/L$,
+\begin{equation}\label{eq:bdrift}
+ b'\le Ce^{-n(h+d)}-\mu_1Ke^{-(h+2b)}.
+\end{equation}
+The ratio of the positive term to the negative term is at most
+\[
+ \frac{C}{\mu_1K}\exp\bigl(-(n-1)h-(n-2)b-nA\bigr),
+\]
+which tends uniformly to zero as $A\to\infty$ for $h,b\ge0$. Thus, at
+sufficiently late times, $b'<0$ whenever $b\ge0$. A first late crossing from $b<0$ to $b\ge0$ would occur at $b=0$ with
+nonnegative left difference quotient, contradicting $b'<0$ there. Hence
+no such crossing is possible.
+
+Two cases remain. If $b$ stays nonnegative, it is bounded and decreasing,
+while $d\to\infty$ and $h\to\infty$ by hypothesis. The positive $a$ and $d$ components are bounded by
+\[
+ Ce^{-Hh}+Ce^{-n(h+d)},
+\]
+while their negative contribution from $c=1$ is at least
+$\mu_1Ke^{-(h+2b)}$. Since $b$ is bounded, both positive-to-negative ratios
+tend to zero. Thus $a',d'<0$ eventually, contradicting $h=a+d\to\infty$.
+
+Otherwise $b<0$ eventually. For $c<L$,
+\[
+ m_c=\ell_c=q_c-2b\ge q_c.
+\]
+As $q_c\to\infty$, equations \eqref{eq:Pbound} and \eqref{eq:Nbound} give,
+in every coordinate,
+\begin{equation}\label{eq:negative}
+ (\grad J_c)_j\le-\tfrac K2 e^{-q_c}
+\end{equation}
+eventually. For $c=L$, use the exact identity
+\[
+ m_L=\ell_L=q_{L-1}+A.
+\]
+Its positive gradient is at most $Ce^{-n(q_{L-1}+A)}$, which is eventually
+smaller than half the weighted negative contribution of coin $L-1$ in
+\eqref{eq:negative}. Every component of $\grad J$ is therefore strictly
+negative eventually. This gives $q_1'=a'+2b'+d'<0$, contradicting
+$q_1\to\infty$. Both cases are impossible.
+\end{proof}
+
+\section{From the adjacent states to the test state}
+The last step connects the adjacent states to the test state. Let
+$k=\lceil L/2\rceil\ge2$ and let $P=a+kb$ be the test-state logit. Along
+any sequence of times tending to infinity with $P\ge0$, every adjacent logit
+tends to $+\infty$; the two signs of $b$ are treated separately. Write
+$R_0=R(0)$ and $S_0=S(0)$.
+
+If $b\ge0$, substituting $a=P-kb$ into $S=A+a\ge S_0$ gives
+\[
+ b\le\frac{A+P-S_0}{k}.
+\]
+Consequently
+\begin{equation}\label{eq:casepositive}
+ h=a+d=P+A-(k-1)b
+ \ge\frac{A+P}{k}+\frac{k-1}{k}S_0
+ \ge\frac Ak+\frac{k-1}{k}S_0.
+\end{equation}
+For $A>0$, $d=A+b>0$, and every training logit satisfies
+$z_{pc}=h+bp+(c-1)d\ge h$. Equation \eqref{eq:Ainfty} proves the claim
+in this case.
+
+If $b<0$, write $B=-b>0$. Then $a=P+kB$, and $R=A-a\ge R_0$ gives
+\[
+ kB\le A-P-R_0.
+\]
+Writing $D=b+d=A-2B$, we have
+\[
+ D=R+P+(k-2)B\ge R_0,\qquad q_1=P+A+(k-3)B.
+\]
+For $k\ge3$, $q_1\ge A$. For $k=2$,
+\[
+ q_1\ge\frac A2+\frac{3P}{2}+\frac{R_0}{2}
+       \ge\frac A2+\frac{R_0}{2}.
+\]
+At sufficiently late times $A>0$. In either case $q_1\ge A/2-|R_0|/2$. Since $q_c=q_1+(c-1)D$,
+\begin{equation}\label{eq:casenegative}
+ q_c\ge\frac A2-L|R_0|\qquad(1\le c<L).
+\end{equation}
+The other adjacent logits satisfy $\ell_c=q_c+2B$ for $c<L$ and
+$\ell_L=q_{L-1}+A$. They too diverge positively by \eqref{eq:Ainfty}.
+This completes the claim for both signs of $b$.
+
+\section{Proof of the theorem}
+\begin{proof}[Proof of Theorem \ref{thm:main}]
+If $P(t)\ge0$ at arbitrarily late times, the previous section supplies an
+unbounded sequence of times along which all adjacent logits are positive.
+Lemma \ref{lem:signs} says that each has a fixed eventual sign and diverges in
+magnitude. All must therefore tend to $+\infty$, contradicting
+Lemma \ref{lem:exclude}.
+
+Thus $P(t)<0$ for all sufficiently large $t$, from every finite initial
+vector. The indicator $\mathbf1_{\{P(t)>0\}}$ tends pointwise to zero and
+is bounded by one. Bounded convergence under $N(0,\sigma^2I_3)$ gives
+$q^{\mathrm{RL}}_\eps(t;\sigma,L)\to0$. The same conclusion holds for any
+probability law on finite initial vectors.
+\end{proof}
+For each fixed positive $\eps$, the limsup in O87 is therefore zero.
+In particular, it cannot have a positive lower bound uniform over small
+positive $\eps$.
+
+\section*{Acknowledgments}
+Computations and draft review used Astra and Fable 5.1.
+
+\begin{thebibliography}{9}
+\bibitem{mais-a8}
+MAIS project (\texttt{github.com/lionellevine/MAIS}),
+\emph{A predictive theory of out-of-distribution generalization:
+which of two perfect policies does gradient descent select?}
+Research agenda MAIS-A8, Definition 3.1 and Question 6.2,
+\href{https://github.com/lionellevine/MAIS/blob/7b23a8a30c0eb0b1d3b55c592ca9554256fc4805/agendas/A8/MAIS-A8.tex}{pinned source, commit 7b23a8a}.
+
+\bibitem{mais-o87}
+MAIS project (\texttt{github.com/lionellevine/MAIS}),
+\emph{Does policy gradient stay misgeneralized despite training diversity?}
+Open problem MAIS-O87,
+\href{https://github.com/lionellevine/MAIS/blob/7b23a8a30c0eb0b1d3b55c592ca9554256fc4805/open-problems/MAIS-O87.md}{problem statement, commit 7b23a8a}.
+\end{thebibliography}
+\end{document}
